@@ -20,3 +20,7 @@ Route::get('/', function () {
 Route::get("/okay", function() {
     return "My name is Heng";
 });
+
+Route::get("/testing", function() {
+    return "My name is Somnang";
+});
