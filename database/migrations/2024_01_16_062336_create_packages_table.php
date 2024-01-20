@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
+            $table->string("name");
+            $table->text("description");
+            $table->decimal('price', 8, 2); // 8 total digits, 2 decimal places
+            $table->string("cpu");
+            $table->string("ram");
+            $table->string("ssd");
+            $table->string("os");
+            $table->boolean('status')->default(false);
             $table->timestamps();
         });
     }
