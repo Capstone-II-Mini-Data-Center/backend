@@ -26,10 +26,20 @@ class UserFactory extends Factory
         return [
             'name' => fake()->name(),
             'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
+            'phone_number' => $this->faker->phoneNumber,
             'password' => static::$password ??= Hash::make('password'),
+            'role' => $this->getRandomRole(["admin", "user"]),
+            'email_verified_at' => now(),
             'remember_token' => Str::random(10),
+            'created_at' => now()->subDays(rand(1, 30)), // Custom created_at timestamp
+            'updated_at' => now(),
         ];
+    }
+
+    protected function getRandomRole($strings)
+    {
+        $randomIndex = array_rand($strings);
+        return $strings[$randomIndex];
     }
 
     /**
