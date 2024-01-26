@@ -11,15 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('packages', function (Blueprint $table) {
+        Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->string("name");
+            $table->string("title");
             $table->text("description");
-            $table->decimal('price', 8, 2); // 8 total digits, 2 decimal places
-            $table->string("cpu");
-            $table->string("memory");
-            $table->string("storage");
-            $table->boolean('status')->default(false);
+            $table->string("banner_image");
+            $table->foreignId("package_id")->constrained();
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('packages');
+        Schema::dropIfExists('banners');
     }
 };

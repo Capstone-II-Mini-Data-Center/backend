@@ -24,11 +24,16 @@ class UserFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => fake()->name(),
-            'email' => fake()->unique()->safeEmail(),
-            'phone_number' => $this->faker->phoneNumber,
-            'password' => static::$password ??= Hash::make('password'),
-            'role' => $this->getRandomRole(["admin", "user"]),
+            // 'name' => fake()->name(),
+            // 'email' => fake()->unique()->safeEmail(),
+            // 'phone_number' => $this->faker->phoneNumber,
+            // 'password' => static::$password ??= Hash::make('password'),
+            // 'role' => $this->getRandomRole(["admin", "user"]),
+            "name" => "Admin",
+            "email" => "admin@cloudbloc.com",
+            "phone_number" => "011222333",
+            "password" => "12345678",
+            "role" => "Admin",
             'email_verified_at' => now(),
             'remember_token' => Str::random(10),
             'created_at' => now()->subDays(rand(1, 30)), // Custom created_at timestamp
