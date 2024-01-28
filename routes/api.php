@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PackageController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\BannerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +26,9 @@ Route::post('/auth/register', [AuthController::class, 'createUser']);
 Route::post('/auth/login', [AuthController::class, 'loginUser']);
 
 Route::post("/auth/logout", [AuthController::class, "logoutUser"])->middleware("auth:sanctum");
+
+Route::apiResource('/package', PackageController::class);
+
+Route::get("/getRecommendedPackage", [PackageController::class, "getRecommendedPackages"]);
+
+Route::get("/getPublishedBanner", [BannerController::class, "getPublishedBanner"]);

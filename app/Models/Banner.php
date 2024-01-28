@@ -13,7 +13,9 @@ class Banner extends Model
     protected $fillable = [
         'title',
         'description',
-        'banner_image'
+        'banner_image',
+        "published",
+        "package_id"
     ];
 
     public function package()

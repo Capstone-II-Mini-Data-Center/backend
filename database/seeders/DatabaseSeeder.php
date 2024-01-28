@@ -4,9 +4,8 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Banner;
 use App\Models\Package;
-use App\Models\PackageUser;
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -37,6 +36,9 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        User::factory(1)->create();
+        // User::factory(1)->create();
+        Package::factory(10)->create()->each(function ($package) {
+            Banner::factory(1)->create(["package_id" => $package->id]);
+        });
     }
 }
