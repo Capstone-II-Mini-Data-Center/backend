@@ -2,9 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PackageController;
+use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\BannerController;
+use App\Http\Controllers\Api\BannerController;
 
 /*
 |--------------------------------------------------------------------------

@@ -1,30 +1,20 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
 use Exception;
-use App\Models\Package;
+use App\Models\Banner;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
-class PackageController extends Controller
+class BannerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        try{
-            $packages = Package::all();
-            return response()->json([
-                'error' => null,
-                'payload' => ['packages' => $packages]
-            ]);
-        }catch (Exception $e){
-            return response()->json([
-                'error' => $e->getMessage(),
-                'payload' => null
-            ]);
-        }
+        //
     }
 
     /**
@@ -75,13 +65,13 @@ class PackageController extends Controller
         //
     }
 
-    public function getRecommendedPackages()
+    public function getPublishedBanner()
     {
         try{
-            $recommendedPackages = Package::where("recommended", true)->get();
+            $publishedBanner = Banner::where("published", true)->get();
             return response()->json([
                 'error' => null,
-                'payload' => ['Recommended packages' => $recommendedPackages]
+                'payload' => ['Published banners' => $publishedBanner]
             ]);
         }catch (Exception $e){
             return response()->json([
