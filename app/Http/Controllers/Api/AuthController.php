@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -26,9 +27,10 @@ class AuthController extends Controller
 
             if($validateUser->fails()){
                 return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateUser->errors()
+                    "code" => 400,
+                    "message" => "ERROR",
+                    'result' => null,
+                    'error' => $validateUser->errors(),
                 ], 401);
             }
 
@@ -41,15 +43,18 @@ class AuthController extends Controller
             ]);
 
             return response()->json([
-                'status' => true,
-                'message' => 'User Created Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                "code" => 200,
+                "message" => "OK",
+                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'error' => null,
             ], 200);
 
-        } catch (\Throwable $th) {
+        } catch (Exception $e) {
             return response()->json([
-                'status' => false,
-                'message' => $th->getMessage()
+                "code" => 400,
+                "message" => "ERROR",
+                'result' => null,
+                'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -65,31 +70,37 @@ class AuthController extends Controller
 
             if($validateUser->fails()){
                 return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateUser->errors()
+                    "code" => 400,
+                    "message" => "Validation error",
+                    'result' => null,
+                    'error' => $validateUser->errors(),
                 ], 401);
             }
 
             if(!Auth::attempt($request->only(['email', 'password']))){
                 return response()->json([
-                    'status' => false,
-                    'message' => 'Email & Password does not match with our record.',
+                    "code" => 400,
+                    "message" => "Email & Password does not match with our record.",
+                    'result' => null,
+                    'error' => null,
                 ], 401);
             }
 
             $user = User::where('email', $request->email)->first();
 
             return response()->json([
-                'status' => true,
-                'message' => 'User Logged In Successfully',
-                'token' => $user->createToken("API TOKEN")->plainTextToken
+                "code" => 200,
+                "message" => "User Logged In Successfully",
+                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'error' => null,
             ], 200);
 
-        } catch (\Throwable $th) {
+        } catch (Exception $e) {
             return response()->json([
-                'status' => false,
-                'message' => $th->getMessage()
+                    "code" => 400,
+                    "message" => "Error",
+                    'result' => null,
+                    'error' => $e->getMessage(),
             ], 500);
         }
     }
@@ -99,7 +110,10 @@ class AuthController extends Controller
         $request->user()->tokens()->delete();
 
         return response()->json([
-           "message" => "Logged out successfully"
+            "code" => 200,
+            "message" => "Logged out successfully",
+            'result' => null,
+            'error' => null,
         ]);
     }
 }

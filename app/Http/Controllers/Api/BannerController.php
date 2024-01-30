@@ -70,13 +70,17 @@ class BannerController extends Controller
         try{
             $publishedBanner = Banner::where("published", true)->get();
             return response()->json([
+                "code" => 200,
+                "message" => "OK",
+                'result' => $publishedBanner,
                 'error' => null,
-                'payload' => ['Published banners' => $publishedBanner]
             ]);
         }catch (Exception $e){
             return response()->json([
+                "code" => 400,
+                "message" => "ERROR",
+                'result' => null,
                 'error' => $e->getMessage(),
-                'payload' => null
             ]);
         }
     }

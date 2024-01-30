@@ -17,13 +17,17 @@ class PackageController extends Controller
         try{
             $packages = Package::all();
             return response()->json([
+                "code" => 200,
+                "message" => "OK",
+                'result' => $packages,
                 'error' => null,
-                'payload' => ['packages' => $packages]
             ]);
         }catch (Exception $e){
             return response()->json([
+                "code" => 400,
+                "message" => "ERROR",
+                'result' => null,
                 'error' => $e->getMessage(),
-                'payload' => null
             ]);
         }
     }
@@ -82,15 +86,18 @@ class PackageController extends Controller
             $recommendedPackages = Package::where("recommended", true)->get();
 
             return response()->json([
+                "code" => 200,
+                "message" => "OK",
+                'result' => $recommendedPackages,
                 'error' => null,
-                'payload' => ['Recommended packages' => $recommendedPackages],
-
             ]);
         }catch (Exception $e){
 
             return response()->json([
+                "code" => 400,
+                "message" => "ERROR",
+                'result' => null,
                 'error' => $e->getMessage(),
-                'payload' => null
             ]);
         }
     }
