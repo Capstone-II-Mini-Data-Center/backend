@@ -4,79 +4,96 @@ namespace App\Http\Controllers;
 
 use Exception;
 use App\Models\Banner;
+use App\Models\Package;
 use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $banners = Banner::with('package')->get();
+        return view('manage_banner.index', compact('banners'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $packages = Package::all();
+        $banner = new Banner(); 
+        return view('manage_banner.create', compact('packages','banner'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
     {
-        //
-    }
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'published' => 'boolean',
+            'package_id' => 'exists:packages,id',
+            
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
-    public function getPublishedBanner()
-    {
-        try{
-            $publishedBanner = Banner::where("published", true)->get();
-            return response()->json([
-                'error' => null,
-                'payload' => ['Published banners' => $publishedBanner]
-            ]);
-        }catch (Exception $e){
-            return response()->json([
-                'error' => $e->getMessage(),
-                'payload' => null
-            ]);
+        $banner = new Banner();
+        $banner->title = $request->input('title');
+        $banner->description = $request->input('description');
+        
+        if ($request->hasFile('banner_image')) {
+            $image = $request->file('banner_image');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            // $banner->banner_image = $imageName;
+            $banner->banner_image = 'images/' . $imageName;
         }
+        $banner->published = $request->has('published') ? true : false;
+        $banner->package_id = $request->input('package_id');
+        $banner->save();
+
+        return redirect()->route('manage_banner.index')->with('success', 'Banner created successfully');
+    }
+
+    public function edit($id)
+    {
+        $banner = Banner::findOrFail($id);
+        $packages = Package::all();
+        return view('manage_banner.edit', compact('banner', 'packages'));
+
+    }
+
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'published' => 'boolean',
+            'package_id' => 'exists:packages,id',
+        ]);
+
+        $banner = Banner::findOrFail($id);
+        $packages = Package::all();
+        $banner->title = $request->input('title');
+        $banner->description = $request->input('description');
+        
+        if ($request->hasFile('banner_image')) {
+            $image = $request->file('banner_image');
+            $imageName = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $banner->banner_image = 'images/' . $imageName;
+        }
+        $banner->published = $request->filled('published');
+
+        $banner->package_id = $request->input('package_id');
+        $banner->save();
+
+        return redirect()->route('manage_banner.index')->with('success', 'Banner updated successfully');
+    }
+
+    public function destroy($id)
+    {
+        $banner = Banner::findOrFail($id);
+        $banner->delete();
+
+        return redirect()->route('manage_banner.index')->with('success', 'Banner deleted successfully');
     }
 }
