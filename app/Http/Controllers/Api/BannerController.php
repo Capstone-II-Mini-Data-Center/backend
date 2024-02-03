@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Exception;
 use App\Models\Banner;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 
 class BannerController extends Controller
@@ -69,13 +70,17 @@ class BannerController extends Controller
     {
         try{
             $publishedBanner = Banner::where("published", true)->get();
+            Log::channel("success")->debug("Get published banners successfully!");
             return response()->json([
                 "code" => 200,
                 "message" => "OK",
-                'result' => $publishedBanner,
+                'result' => [
+                    "Published banners" => $publishedBanner
+                ],
                 'error' => null,
             ]);
         }catch (Exception $e){
+            Log::channel("error")->debug("Get published banners error!");
             return response()->json([
                 "code" => 400,
                 "message" => "ERROR",

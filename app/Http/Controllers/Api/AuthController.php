@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Api;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use App\Models\UserLogin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -26,6 +28,7 @@ class AuthController extends Controller
             ]);
 
             if($validateUser->fails()){
+                Log::channel("error")->debug("Validation signup error!");
                 return response()->json([
                     "code" => 400,
                     "message" => "ERROR",
@@ -41,15 +44,20 @@ class AuthController extends Controller
                 'password' => Hash::make($request->password),
                 "role" => $request->role
             ]);
-
+            Log::channel("success")->debug("Signup successfully!");
             return response()->json([
                 "code" => 200,
                 "message" => "OK",
-                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                "result" => [
+                    "user" => [
+                        $user
+                    ]
+                ],
                 'error' => null,
             ], 200);
 
         } catch (Exception $e) {
+            Log::channel("error")->debug("Signup error!");
             return response()->json([
                 "code" => 400,
                 "message" => "ERROR",
@@ -69,6 +77,7 @@ class AuthController extends Controller
             ]);
 
             if($validateUser->fails()){
+                Log::channel("error")->debug("Validation login error!");
                 return response()->json([
                     "code" => 400,
                     "message" => "Validation error",
@@ -78,6 +87,7 @@ class AuthController extends Controller
             }
 
             if(!Auth::attempt($request->only(['email', 'password']))){
+                Log::channel("error")->debug("Email and Password do not match login error!");
                 return response()->json([
                     "code" => 400,
                     "message" => "Email & Password does not match with our record.",
@@ -87,15 +97,27 @@ class AuthController extends Controller
             }
 
             $user = User::where('email', $request->email)->first();
+            $token = $user->createToken("API TOKEN")->plainTextToken;
 
+            UserLogin::create([
+                "user_id" => $user->id,
+                "user_name" => $user->name,
+                "token" => $token,
+                "token_expired" => now()->addDay()
+            ]);
+
+            Log::channel("success")->debug("Signin successfully!");
             return response()->json([
                 "code" => 200,
                 "message" => "User Logged In Successfully",
-                'token' => $user->createToken("API TOKEN")->plainTextToken,
+                'result' => [
+                    "token" => $token
+                ],
                 'error' => null,
             ], 200);
 
         } catch (Exception $e) {
+            Log::channel("error")->debug("Signin error!");
             return response()->json([
                     "code" => 400,
                     "message" => "Error",
@@ -107,8 +129,13 @@ class AuthController extends Controller
 
     public function logoutUser(Request $request)
     {
+        $token = str_replace('Bearer ', '', request()->header('Authorization'));
+        $userLogin = UserLogin::where("token", $token)->first();
+        $userLogin->update([
+                "token_expired" => now()
+        ]);
         $request->user()->tokens()->delete();
-
+        Log::channel("success")->debug("Logout successfully!");
         return response()->json([
             "code" => 200,
             "message" => "Logged out successfully",

@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('server_creds', function (Blueprint $table) {
+        Schema::create('user_logins', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("order_detail_id")->constrained();
-            $table->string("ip_address")->nullable();
-            $table->string("domain_name")->nullable();
-            $table->string("username")->nullable();
-            $table->string("password")->nullable();
+            $table->foreignId("user_id")->constrained();
+            $table->string("user_name");
+            $table->text("token");
+            $table->dateTime("token_expired");
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('server_creds');
+        Schema::dropIfExists('user_logins');
     }
 };
