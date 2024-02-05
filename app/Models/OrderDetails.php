@@ -31,7 +31,7 @@ class OrderDetails extends Model
         return $this->belongsTo(Package::class);
     }
 
-    public function server_cred()
+    public function serverCred()
     {
         return $this->hasOne(ServerCred::class);
     }

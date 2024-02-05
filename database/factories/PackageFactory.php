@@ -19,7 +19,7 @@ class PackageFactory extends Factory
         return [
             'name' => fake()->name(),
             'description' => $this->faker->text,
-            // 2 decimal and pirce between 10 to 1000 $this->faker->word
+            // 2 decimal and price between 10 to 1000 $this->faker->word
             "price" => $this->faker->randomFloat(2, 10, 1000),
             'cpu' => $this->faker->word,
             'memory' => $this->faker->word,
