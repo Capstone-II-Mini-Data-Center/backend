@@ -20,6 +20,7 @@ class UserSeeder extends Seeder
                 'email' => 'cloudbloc@gmail.com',
                 'role' => 'admin',
                 'password' => Hash::make('password'),
+                'email_verified_at' => now(),
             ]
         );
     }
