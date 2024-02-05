@@ -40,9 +40,12 @@ class BannerController extends Controller
         if ($request->hasFile('banner_image')) {
             $image = $request->file('banner_image');
             $imageName = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            // $banner->banner_image = $imageName;
-            $banner->banner_image = 'images/' . $imageName;
+            $path = public_path('images/banner/');
+            if (!is_dir($path)){
+                mkdir($path, 0755, true);
+            }
+            $image->move($path, $imageName);
+            $banner->banner_image = 'images/banner/' . $imageName;
         }
         $banner->published = $request->has('published') ? true : false;
         $banner->package_id = $request->input('package_id');
@@ -76,8 +79,12 @@ class BannerController extends Controller
         if ($request->hasFile('banner_image')) {
             $image = $request->file('banner_image');
             $imageName = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path('images'), $imageName);
-            $banner->banner_image = 'images/' . $imageName;
+            $path = public_path('images/banner/');
+            if (!is_dir($path)){
+                mkdir($path, 0755, true);
+            }
+            $image->move($path, $imageName);
+            $banner->banner_image = 'images/banner/' . $imageName;
         }
         $banner->published = $request->filled('published');
 
