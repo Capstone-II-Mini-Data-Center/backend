@@ -41,8 +41,8 @@
             </div>
 
             <div class="mb-4">
-                <input type="checkbox" name="recommended" id="recommended" class="mr-2">
-                <label for="recommended" class="text-sm text-gray-700" value="{{ old('recommended', $package->recommended) }}">Recommended</label>
+                <input type="checkbox" name="recommended" class="mr-2" value="1" {{ $package->recommended ? 'checked' : '' }}>
+                <label for="recommended" class="text-sm text-gray-700">Recommended</label>
             </div>
 
 
