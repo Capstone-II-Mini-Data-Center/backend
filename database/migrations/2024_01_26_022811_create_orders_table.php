@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->decimal("total_amount", 8, 2);
-            $table->string("payment_image");
+            $table->decimal("total_amount", 8, 2)->nullable();
+            $table->string("payment_image")->nullable();
             $table->enum("status", ["pending", "in progress", "delivered", "expired"]);
             $table->foreignId("user_id")->constrained();
             $table->timestamps();

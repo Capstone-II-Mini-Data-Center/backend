@@ -18,7 +18,9 @@ class OrderDetails extends Model
         'discount_amount',
         'total_amount',
         'plan',
-        'expired_date'
+        'expired_date',
+        "orders_id",
+        "package_id"
     ];
 
     public function order()

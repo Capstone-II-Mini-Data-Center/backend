@@ -20,7 +20,7 @@ return new class extends Migration
             $table->decimal("discount_amount", 8, 2);
             $table->decimal("total_amount", 8, 2);
             $table->string("plan");
-            $table->date('expired_date')->nullable();
+            $table->dateTime('expired_date')->nullable();
             $table->timestamps();
         });
     }
