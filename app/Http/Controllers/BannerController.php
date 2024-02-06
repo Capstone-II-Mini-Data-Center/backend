@@ -29,7 +29,6 @@ class BannerController extends Controller
             'title' => 'required',
             'description' => 'required',
             'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'published' => 'boolean',
             'package_id' => 'exists:packages,id',
             
         ]);
@@ -66,9 +65,10 @@ class BannerController extends Controller
             'title' => 'required',
             'description' => 'required',
             'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'published' => 'boolean',
+            // 'published' => 'boolean',
             'package_id' => 'exists:packages,id',
         ]);
+        // dd($request->all());
 
         $banner = Banner::findOrFail($id);
         $packages = Package::all();

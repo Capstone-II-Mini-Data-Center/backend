@@ -28,7 +28,7 @@ class PackageController extends Controller
             'cpu' => 'required|string',
             'memory' => 'required|string',
             'storage' => 'required|string',
-            'recommended' => 'boolean',
+            // 'recommended' => 'boolean',
         ]);
 
         Package::create($request->all());
@@ -51,7 +51,7 @@ class PackageController extends Controller
             'cpu' => 'required|string',
             'memory' => 'required|string',
             'storage' => 'required|string',
-            'recommended' => 'boolean',
+
         ]);
 
         $package = Package::findOrFail($id);

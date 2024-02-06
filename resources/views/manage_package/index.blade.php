@@ -21,6 +21,7 @@
                     <th class="w-1/7 py-2 px-4 border-b text-center">CPU</th>
                     <th class="w-1/7 py-2 px-4 border-b text-center">Memory</th>
                     <th class="w-1/7 py-2 px-4 border-b text-center">Storage</th>
+                    <th class="w-1/7 py-2 px-4 border-b text-center">Recommended</th>
                     <th class="w-2/7 py-2 px-4 border-b text-center">Actions</th>
                 </tr>
             </thead
@@ -33,6 +34,7 @@
             <td class="py-2 px-4 border-b text-center">{{ $package->cpu }}</td>
             <td class="py-2 px-4 border-b text-center">{{ $package->memory }}</td>
             <td class="py-2 px-4 border-b text-center">{{ $package->storage }}</td>
+            <td class="py-2 px-4 border-b text-center">{{ $package->recommended? 'Yes' : 'No' }}</td>
             <td class="py-2 px-4 border-b text-center">
                 <a href="{{ route('manage_package.edit', $package->id) }}" class="text-yellow-500 hover:text-yellow-700 mr-2">
                     <i class="fas fa-edit"></i> Edit
