@@ -4,8 +4,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\CheckoutOrderController;
 use App\Http\Controllers\Api\PackageController;
 use App\Http\Controllers\Api\GetUserProfileController;
+use App\Http\Controllers\Api\OrderHistoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,3 +37,7 @@ Route::get("/getRecommendedPackage", [PackageController::class, "getRecommendedP
 Route::get("/getPublishedBanner", [BannerController::class, "getPublishedBanner"]);
 
 Route::post("/getUserProfile", [GetUserProfileController::class, "getUserProfile"]);
+
+Route::get("/getOrderHistory", [OrderHistoryController::class, "getOrderHistory"]);
+
+Route::post("/checkoutOrder", [CheckoutOrderController::class, "checkoutOrder"]);

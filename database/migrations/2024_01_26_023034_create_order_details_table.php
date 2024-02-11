@@ -13,14 +13,14 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
-            $table->foreignId("order_id")->constrained();
+            $table->foreignId("orders_id")->constrained();
             $table->foreignId("package_id")->constrained();
             $table->string("package_name");
             $table->decimal("unit_price", 8, 2);
             $table->decimal("discount_amount", 8, 2);
             $table->decimal("total_amount", 8, 2);
             $table->string("plan");
-            $table->date('expired_date')->nullable();
+            $table->dateTime('expired_date')->nullable();
             $table->timestamps();
         });
     }

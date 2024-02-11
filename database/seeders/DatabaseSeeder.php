@@ -4,6 +4,9 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\OrderDetails;
+use App\Models\Orders;
+use App\Models\ServerCred;
 use App\Models\User;
 use App\Models\Banner;
 use App\Models\Package;

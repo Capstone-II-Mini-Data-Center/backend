@@ -17,7 +17,11 @@ class OrderDetailsFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "unit_price" => $this->faker->randomFloat(2, 10, 1000),
+            "discount_amount" => $this->faker->randomFloat(2, 10, 1000),
+            "total_amount" => $this->faker->randomFloat(2, 10, 1000),
+            "plan" => $this->faker->word,
+            "expired_date" => now()->addDays(2)
         ];
     }
 }

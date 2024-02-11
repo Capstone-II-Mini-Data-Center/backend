@@ -17,7 +17,10 @@ class ServerCredFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            "ip_address" => $this->faker->word,
+            "domain_name" => $this->faker->word,
+            "username" => $this->faker->word,
+            "password" => $this->faker->word,
         ];
     }
 }

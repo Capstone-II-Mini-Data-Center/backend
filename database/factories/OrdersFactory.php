@@ -17,7 +17,10 @@ class OrdersFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            // 2 decimal and price between 10 to 1000
+            "total_amount" => $this->faker->randomFloat(2, 10, 1000),
+            "payment_image" => $this->faker->word,
+            "status" => $this->faker->randomElement(["pending", "in progress", "delivered", "expired"]),
         ];
     }
 }

@@ -18,7 +18,9 @@ class OrderDetails extends Model
         'discount_amount',
         'total_amount',
         'plan',
-        'expired_date'
+        'expired_date',
+        "orders_id",
+        "package_id"
     ];
 
     public function order()
@@ -31,7 +33,7 @@ class OrderDetails extends Model
         return $this->belongsTo(Package::class);
     }
 
-    public function server_cred()
+    public function serverCred()
     {
         return $this->hasOne(ServerCred::class);
     }
