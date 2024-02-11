@@ -16,10 +16,11 @@ class UserSeeder extends Seeder
     {
         User::create(
             [
-                'name' => 'Admin',
-                'email' => 'cloudbloc@gmail.com',
-                'role' => 'admin',
-                'password' => Hash::make('password'),
+                "name" => "Admin",
+                "email" => "cloudbloc@gmail.com",
+                "phone_number" => "011222333",
+                "password" => Hash::make('12345678'),
+                "role" => "admin",
                 'email_verified_at' => now(),
             ]
         );
