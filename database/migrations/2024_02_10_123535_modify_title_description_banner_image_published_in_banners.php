@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('banners', function (Blueprint $table) {
-            $table->id();
+        Schema::table('banners', function (Blueprint $table) {
             $table->string("title")->nullable()->change();
             $table->text("description")->nullable()->change();
             $table->string("banner_image")->nullable()->change();
             $table->boolean("published")->default(0)->nullable()->change();
-            $table->foreignId("package_id")->constrained();
-            $table->timestamps();
         });
     }
 
@@ -27,6 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('banners');
+        Schema::table('banners', function (Blueprint $table) {
+            //
+        });
     }
 };

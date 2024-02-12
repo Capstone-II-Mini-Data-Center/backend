@@ -20,7 +20,9 @@ class OrderDetails extends Model
         'plan',
         'expired_date',
         "orders_id",
-        "package_id"
+        "package_id",
+        "os",
+        "status"
     ];
 
     public function order()

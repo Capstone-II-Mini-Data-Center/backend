@@ -19,13 +19,14 @@ class CheckoutOrderController extends Controller
             $order = Orders::create([
                 "total_amount" => null,
                 "payment_image" => null,
-                "status" => "pending",
                 "user_id" => $userLogin->user_id
             ]);
             $orderDetails = $request->all();
             $total_price = 0;
             foreach ($orderDetails as $orderDetail) {
                 OrderDetails::create([
+                    "status" => "pending",
+                    "os" => $orderDetail["os"],
                     "plan" => $orderDetail["plan"],
                     "package_id" => $orderDetail["package_id"],
                     "orders_id" => $order->id,

@@ -13,6 +13,14 @@ class OrderHistoryController extends Controller
     {
         try {
             $orders = Orders::where("user_id", $request->user_id)->with('orderDetails.package')->get();
+            if($orders->isEmpty()){
+                return response()->json([
+                    "code" => 400,
+                    "message" => "ERROR",
+                    'result' => null,
+                    'error' => "There is no order!"
+                ]);
+            }
             return response()->json([
                 "code" => 200,
                 "message" => "Get order history successfully",
