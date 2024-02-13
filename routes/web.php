@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ManageOrderController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,6 +47,11 @@ Route::put('/manage/banners/{id}', [BannerController::class, 'update'])->name('m
 Route::delete('/manage/banners/{id}', [BannerController::class, 'destroy'])->name('manage_banner.destroy');
 
 
+Route::get('/users', [UserController::class, 'index'])->name('users.index');
+
+Route::get('/orders', [ManageOrderController::class, 'index'])->name('manage_order.index');
+Route::put('/orders/{orderId}/update-status', [ManageOrderController::class, 'updateStatus'])->name('manage_order.update-status');
+Route::get('/manage_order/{orderId}', [ManageOrderController::class, 'show'])->name('manage_order.show');
 
 
 require __DIR__.'/auth.php';

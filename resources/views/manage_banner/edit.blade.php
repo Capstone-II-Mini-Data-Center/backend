@@ -34,7 +34,7 @@
 
             <div class="mb-4">
                 <label for="published" class="block text-sm font-medium text-gray-700">Published</label>
-                <input type="checkbox" name="published" id="published" class="mr-2" {{ $banner->published ? 'checked' : '' }}>
+                <input type="checkbox" name="published" id="published" class="mr-2" value="1" {{ $banner->published ? 'checked' : '' }}>
             </div>
 
             <div class="mb-4">

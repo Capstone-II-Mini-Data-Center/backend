@@ -18,7 +18,7 @@ class BannerController extends Controller
     public function create()
     {
         $packages = Package::all();
-        $banner = new Banner();
+        $banner = new Banner(); 
         return view('manage_banner.create', compact('packages','banner'));
     }
 
@@ -30,22 +30,19 @@ class BannerController extends Controller
             'description' => 'required',
             'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'package_id' => 'exists:packages,id',
-
+            
         ]);
 
         $banner = new Banner();
         $banner->title = $request->input('title');
         $banner->description = $request->input('description');
-
+        
         if ($request->hasFile('banner_image')) {
             $image = $request->file('banner_image');
             $imageName = time().'.'.$image->getClientOriginalExtension();
-            $path = public_path('images/banner/');
-            if (!is_dir($path)){
-                mkdir($path, 0755, true);
-            }
-            $image->move($path, $imageName);
-            $banner->banner_image = 'images/banner/' . $imageName;
+            $image->move(public_path('images'), $imageName);
+            // $banner->banner_image = $imageName;
+            $banner->banner_image = 'images/' . $imageName;
         }
         $banner->published = $request->has('published') ? true : false;
         $banner->package_id = $request->input('package_id');
@@ -68,23 +65,21 @@ class BannerController extends Controller
             'title' => 'required',
             'description' => 'required',
             'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            // 'published' => 'boolean',
             'package_id' => 'exists:packages,id',
         ]);
+        // dd($request->all());
 
         $banner = Banner::findOrFail($id);
         $packages = Package::all();
         $banner->title = $request->input('title');
         $banner->description = $request->input('description');
-
+        
         if ($request->hasFile('banner_image')) {
             $image = $request->file('banner_image');
             $imageName = time().'.'.$image->getClientOriginalExtension();
-            $path = public_path('images/banner/');
-            if (!is_dir($path)){
-                mkdir($path, 0755, true);
-            }
-            $image->move($path, $imageName);
-            $banner->banner_image = 'images/banner/' . $imageName;
+            $image->move(public_path('images'), $imageName);
+            $banner->banner_image = 'images/' . $imageName;
         }
         $banner->published = $request->filled('published');
 

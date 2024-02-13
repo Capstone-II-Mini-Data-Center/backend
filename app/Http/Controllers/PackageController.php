@@ -28,16 +28,10 @@ class PackageController extends Controller
             'cpu' => 'required|string',
             'memory' => 'required|string',
             'storage' => 'required|string',
+            // 'recommended' => 'boolean',
         ]);
-        $package = new Package();
-        $package->name = $request->input('name');
-        $package->description = $request->input('description');
-        $package->price = $request->input('price');
-        $package->cpu = $request->input('cpu');
-        $package->memory = $request->input('memory');
-        $package->storage = $request->input('storage');
-        $package->recommended = $request->has('recommended') ? true : false;
-        $package->save();
+
+        Package::create($request->all());
 
         return redirect()->route('manage_package.index')->with('success', 'Package created successfully');
     }
@@ -57,16 +51,15 @@ class PackageController extends Controller
             'cpu' => 'required|string',
             'memory' => 'required|string',
             'storage' => 'required|string',
+
         ]);
 
         $package = Package::findOrFail($id);
         $package->update($request->all());
-        $package->recommended = $request->filled('recommended');
-        $package->save();
 
         return redirect()->route('manage_package.index')->with('success', 'Package updated successfully');
     }
-
+    
     public function destroy($id)
 {
     $package = Package::findOrFail($id);
@@ -76,5 +69,5 @@ class PackageController extends Controller
 }
 
 
-
+    
 }
