@@ -17,12 +17,20 @@ class PackageController extends Controller
     {
         try{
             $packages = Package::all();
+            if(!$packages){
+                return response()->json([
+                    "code" => 400,
+                    "message" => "ERROR",
+                    'result' => null,
+                    'error' => "There is no packages!"
+                ]);
+            }
             Log::channel("success")->debug("Get all packages successfully!");
             return response()->json([
                 "code" => 200,
                 "message" => "OK",
                 'result' => [
-                    "Packages" => $packages
+                    "packages" => $packages
                 ],
                 'error' => null,
             ]);
@@ -40,16 +48,24 @@ class PackageController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Package $package)
+    public function show($id)
     {
         try{
-            $package = Package::find($package->id);
+            $package = Package::find($id);
+            if(!$package){
+                return response()->json([
+                    "code" => 400,
+                    "message" => "ERROR",
+                    'result' => null,
+                    'error' => "There is no package!"
+                ]);
+            }
             Log::channel("success")->debug("Get one package successfully!");
             return response()->json([
                 "code" => 200,
                 "message" => "OK",
                 'result' => [
-                    "Package" => $package
+                    "package" => $package
                 ],
                 'error' => null,
             ]);
@@ -69,12 +85,20 @@ class PackageController extends Controller
     {
         try{
             $recommendedPackages = Package::where("recommended", true)->get();
+            if(!$recommendedPackages){
+                return response()->json([
+                    "code" => 400,
+                    "message" => "ERROR",
+                    'result' => null,
+                    'error' => "There is no recommended packages!"
+                ]);
+            }
             Log::channel("success")->debug("Get recommended packages successfully!");
             return response()->json([
                 "code" => 200,
                 "message" => "OK",
                 'result' => [
-                    "Recommended packages" => $recommendedPackages
+                    "recommended_packages" => $recommendedPackages
                 ],
                 'error' => null,
             ]);

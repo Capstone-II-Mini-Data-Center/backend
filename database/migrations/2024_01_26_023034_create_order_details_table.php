@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId("package_id")->constrained();
             $table->string("package_name");
             $table->decimal("unit_price", 8, 2);
-            $table->decimal("discount_amount", 8, 2);
+            $table->decimal("discount_amount", 8, 2)->nullable()->change();
             $table->decimal("total_amount", 8, 2);
             $table->string("plan");
             $table->dateTime('expired_date')->nullable();

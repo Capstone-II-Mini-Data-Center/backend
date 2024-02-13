@@ -7,6 +7,7 @@ use App\Models\Banner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
+use PSpell\Config;
 
 class BannerController extends Controller
 {
@@ -14,12 +15,23 @@ class BannerController extends Controller
     {
         try{
             $publishedBanner = Banner::where("published", true)->get();
+            if(!$publishedBanner){
+                return response()->json([
+                    "code" => 400,
+                    "message" => "ERROR",
+                    'result' => null,
+                    'error' => "There is no published banner!"
+                ]);
+            }
+            foreach($publishedBanner as $banner){
+                $banner->banner_image = Config("app.url_capstone")  . "/" . $banner->banner_image;
+            }
             Log::channel("success")->debug("Get published banners successfully!");
             return response()->json([
                 "code" => 200,
                 "message" => "OK",
                 'result' => [
-                    "Published banners" => $publishedBanner
+                    "published_banners" => $publishedBanner
                 ],
                 'error' => null,
             ]);

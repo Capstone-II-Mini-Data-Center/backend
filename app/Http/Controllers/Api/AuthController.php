@@ -42,7 +42,8 @@ class AuthController extends Controller
                 'email' => $request->email,
                 "phone_number" => $request->phone_number,
                 'password' => Hash::make($request->password),
-                "role" => $request->role
+                "role" => $request->role,
+                "email_verified_at" => now()->addHours(7)
             ]);
             Log::channel("success")->debug("Signup successfully!");
             return response()->json([
