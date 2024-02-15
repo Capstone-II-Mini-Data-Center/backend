@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'url_capstone' => 'https://dev-cloudbloc.cammob.ovh/api',
+    'url_capstone' => 'https://dev-cloudbloc.cammob.ovh/public',
 
     'url' => env('APP_URL', 'http://localhost'),
 
