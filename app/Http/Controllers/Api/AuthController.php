@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use Exception;
+use Carbon\Carbon;
 use App\Models\User;
+use App\Models\UserLogin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
-use App\Models\UserLogin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -100,19 +101,26 @@ class AuthController extends Controller
             $user = User::where('email', $request->email)->first();
             $token = $user->createToken("API TOKEN")->plainTextToken;
 
-            UserLogin::create([
+            $userLogin = UserLogin::create([
                 "user_id" => $user->id,
                 "user_name" => $user->name,
                 "token" => $token,
                 "token_expired" => now()->addDay()
             ]);
 
+            // Parse the original timestamp using Carbon
+            $carbonDate = Carbon::parse($userLogin->token_expired);
+
+            // Convert to the desired format
+            $formattedDate = $carbonDate->format('Y-m-d H:i:s');
+
             Log::channel("success")->debug("Signin successfully!");
             return response()->json([
                 "code" => 200,
                 "message" => "User Logged In Successfully",
                 'result' => [
-                    "token" => $token
+                    "token" => $token,
+                    "token_expired" => $formattedDate
                 ],
                 'error' => null,
             ], 200);
