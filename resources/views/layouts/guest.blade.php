@@ -26,21 +26,29 @@
             <div class="circle8"></div>
             <div class="circle9"></div>
         </div>
-           
-        <div class="flex">
-            <div class="flex flex-row justify-center items-center container-size container-bg-color shadow-md">
-                <div class="">
-                    <!-- <div> -->
-                        <!-- <div class="text-blue-500 text-4xl font-bold mt-12"> -->
-                            <!-- CloudiBloc -->
-                        <!-- </div> -->
-                    <!-- </div> -->
+        <div class="flex justify-center items-center text-5xl mt-20 font-bold" style="color: #3B82F6;">
+        @if(Route::currentRouteName() == 'login')
+            Log In
+        @elseif(Route::currentRouteName() == 'register')
+            Register
+        @endif
+    </div>
+
+         <!-- <div class="flex justify-center items-center text-5xl mt-20 font-bold"style="color:#3B82F6;" >Log In</div> -->
+        <div>
+            <div class="container-size container-bg-color pb-6 shadow-md flex flex-col">
+                <div class="flex flex-row  justify-center items-center">
                     <div class="w-96 ml-3 sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-lg overflow-hidden sm:rounded-lg">
                         {{ $slot }}
                     </div>
-                </div>
-                <div class=" w-96 ml-2 mr-4">
-                    <img src="{{ asset('images/logo.svg') }}" alt="Logo">
+                    <div class=" w-96 ml-2 mr-4">
+                        <div>
+                        <img src="{{ asset('images/logo-rec.png') }}" alt="Logo" class="w-80 ml-8"> 
+                        </div>
+                        <div class="text-5xl font-bold ml-20 mt-6" style="color:#3B82F6;">
+                            CloudiBloc
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -56,12 +64,12 @@
     }
     .container-size{
         width: 800px;
-        height: 400px;
+        height: 330px;
         display: flex;
         justify-content: center;
         justify-item: center;
         margin-left: 280px;
-        margin-top: 120px;
+        margin-top: 40px;
     }
 
     .login-background-color{
@@ -76,7 +84,7 @@
         left: -200px;
         width: 700px;
         height: 700px;
-        background-color: #a9d0f0;
+        background-color: #9fe6ff;
         border-radius: 100%;
         z-index: -1;
     }
@@ -86,7 +94,7 @@
        left: -260px;
        width: 700px;
        height: 700px;
-       background-color: #88beea;
+       background-color: #95dcff;
        border-radius: 100%;
        z-index: -1;
     }
@@ -96,7 +104,7 @@
         left: -310px;
         width: 700px;
         height: 700px;
-        background-color: #66abe5;
+        background-color: #59a0ff;
         border-radius: 100%;
         z-index: -1;
     }
@@ -106,7 +114,7 @@
         left: -355px;
         width: 700px;
         height: 700px;
-        background-color: #4599df;
+        background-color: #3B82F6;
         border-radius: 100%;
         z-index: -1;
     }
@@ -117,7 +125,7 @@
         top:-40px;
         width: 700px;
         height: 700px;
-        background-color: #cbe2f6;
+        background-color: #a9f0ff;
         border-radius: 100%;
         z-index: -1;
     }
@@ -128,7 +136,7 @@
         top: 30px;
         width: 700px;
         height: 700px;
-        background-color: #a9d0f0;
+        background-color: #81c8ff;
         border-radius: 100%;
         z-index: -1;
     }
@@ -139,7 +147,7 @@
         top: 100px;
         width: 700px;
         height: 700px;
-        background-color: #88beea;
+        background-color: #6db4ff;
         border-radius: 100%;
         z-index: -1;
        
@@ -151,39 +159,10 @@
         top: 170px;
         width: 700px;
         height: 700px;
-        background-color: #66abe5;
+        background-color: #3B82F6;
         border-radius: 100%;
         z-index: -1;
     }
-     /* .circle9 {
-        position: absolute;
-        right: 550px;
-        top:60px;
-        width: 30px;
-        height: 30px;
-        background-color: #66abe5;
-        border-radius: 100%;
-        z-index: -1;
-    }
-     */
-   .login_container{
-       
-        /* background-color:red;    
-        width:100px; */
-        
-        /* position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        width: 1000px;
-        height: 500px;
-        margin-top: 250px;
-        margin-left:380px;
-        background-color:#fbfbf9;
-        box-shadow: 0 4px 8px rgba(128, 128, 128, 0.5); */
-   }
-
     
 </style>
 

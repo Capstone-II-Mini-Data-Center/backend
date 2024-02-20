@@ -6,10 +6,10 @@
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
-                <div class="w-24 -mt-4 overflow-hidden ml-2">
+                <div class="w-24  -mt-4">
                     <div class="">
                         <a href="{{ route('dashboard') }}">
-                            <img src="{{ asset('images/logo.svg') }}" alt="Logo" >
+                            <img src="{{ asset('images/logo.png') }}" alt="Logo" >
                         </a>
                     </div>
                 </div>

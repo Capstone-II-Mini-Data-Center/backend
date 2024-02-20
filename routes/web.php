@@ -18,8 +18,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', function (){
+   return redirect('/login');
 });
 
 Route::get('/dashboard', function () {
@@ -38,6 +42,10 @@ Route::post('/manage/packages', [PackageController::class, 'store'])->name('mana
 Route::get('/manage/packages/{id}/edit', [PackageController::class, 'edit'])->name('manage_package.edit');
 Route::put('/manage/packages/{id}', [PackageController::class, 'update'])->name('manage_package.update');
 Route::delete('/manage/packages/{id}', [PackageController::class, 'destroy'])->name('manage_package.destroy');
+Route::get('/manage/packages/search', [PackageController::class, 'search'])->name('manage_package.search');
+Route::get('/manage/packages/filterByRecommended', [PackageController::class, 'filterByRecommended'])->name('manage_package.filterByRecommended');
+Route::get('/manage/packages/filterByPriceRange', [PackageController::class, 'filterByPriceRange'])->name('manage_package.filterByPriceRange');
+
 
 Route::get('/manage/banners', [BannerController::class, 'index'])->name('manage_banner.index');
 Route::get('/manage/banners/create', [BannerController::class, 'create'])->name('manage_banner.create');

@@ -5,10 +5,30 @@
 @section('content')
     <div class="flex justify-center"> <!-- Center the content -->
         <div class="w-full max-w-6xl bg-white mt-10 mb-10 ml-12"> <!-- Set max width and full width -->
-
-            <div class="flex justify-between mb-4">
-                <h1 class="text-2xl font-semibold"></h1>
+            <div class="flex flex-row justify-between">
+                <div class="flex justify-between mb-4">
+                    <h1 class="text-2xl font-semibold" style="color: #3B82F6;" >User Page</h1>
+                </div>
+                <div class="mb-4">
+                   <form action="{{ route('users.index') }}" method="GET">
+                        <div class="relative flex items-center">
+                            <input 
+                                type="text" 
+                                name="search" 
+                                id="search" 
+                                class="mt-1 p-2 border border-gray-400 rounded-md w-full pl-10 flex items-center" 
+                                placeholder="Enter name..." 
+                                value="{{ request('search') }}"
+                                autocomplete="off"
+                            >
+                            <button type="submit" class=" flex items-center absolute inset-y-0 right-0 px-4 py-2 rounded-md">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </form> 
+                </div>
             </div>
+
             <div class="shadow-lg rounded-xl">
             <table class="min-w-full border border-collapse  rounded-lg overflow-hidden">
                 <thead class="text-blue-500 border border-2">
@@ -27,20 +47,19 @@
                             <td class="py-2 px-4 border-b text-center">{{ $user->email }}</td>
                             <td class="py-2 px-4 border-b text-center">{{ $user->phone_number }}</td>
                             <td class="py-2 px-4 border-b text-center flex items-center justify-center">
-                                <a href="#" class=" text-blue-500 hover:text-blue-300 mr-2">
-                                    <div class="flex justify-center items-center">
-                                        <div class="ml-10">
-                                            Detailed
+                                <button class="flex items-center bg-blue-500 text-white rounded-lg py-2 hover:bg-blue-300">
+                                    <a href="#" class=" text-blue-501 mr-2">
+                                        <div class="flex justify-between items-center ">
+                                            <div class="ml-4">
+                                                Detailed
+                                            </div>
+                                            <div class=" flex justify-center items-center ml-3">
+                                                 <i class="fas fa-edit" style="color: white;"></i> 
+                                            </div>
+                                        
                                         </div>
-                                        <div class=" flex justify-center items-center ml-3">
-                                            <!-- <a href="#" class="text-yellow-500 hover:text-yellow-700 mr-2"> -->
-                                                <img src="{{ asset('images/detail-icon.png') }}" alt="icon" class="w-7 h-7 flex">
-                                            <!-- </a> -->
-                                        </div>
-                                    
-                                    </div>
-                                </a>
-                                
+                                    </a>  
+                                </button> 
                             </td>
                         </tr>
                     @endforeach

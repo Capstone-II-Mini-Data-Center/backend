@@ -3,17 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Orders; 
+use App\Models\Orders;
+use App\Models\OrderDetails;  
 use App\Models\User;
 
 class ManageOrderController extends Controller
 {
+    // public function index()
+    // {
+    //     $orders = Orders::with('user')->get(); 
+    //     return view('manage_order.index', compact('orders'));
+    // }
+    
     public function index()
     {
-        $orders = Orders::with('user')->get(); 
-        return view('manage_order.index', compact('orders'));
+        $orderDetails = OrderDetails::all(); 
+        return view('manage_order.index', compact('orderDetails'));
     }
-
     public function show($orderId)
     {
         $order = Orders::with('order_details.package')->findOrFail($orderId);
