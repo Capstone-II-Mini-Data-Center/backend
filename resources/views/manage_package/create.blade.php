@@ -4,9 +4,9 @@
     <div class="w-6/7 bg-white mr-10 ml-10">
         <h1 class="text-2xl font-semibold mb-6">Create Package</h1>
     </div>
-    <div class="w-6/7 bg-white mr-10 ml-10 flex justify-center">        
+    <div class="w-6/7 bg-white mr-10 ml-10 flex justify-center ">        
 
-        <form action="{{ route('manage_package.store') }}" method="post" class="w-80">
+        <form action="{{ route('manage_package.store') }}" method="post" class="w-1/2 p-10 bg-gray-100 shadow-lg rounded-xl">
             @csrf
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
@@ -28,7 +28,7 @@
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
                         $
                     </span>
-                    <input type="number" name="price" id="price" step="5" min="0" class="pl-10 pr-2 py-2 border rounded-md w-full" required>
+                    <input type="number" name="price" id="price" step="0.01" min="0" class="pl-10 pr-2 py-2 border rounded-md w-full" required>
                 </div>
             </div>
                
@@ -53,10 +53,10 @@
                 <div class="flex flex-row items-center">
                     <div class="w-full pr-6">
                         <select name="memory" id="memory" class="pr-11 py-2 border rounded-md w-full" required>
-                            <option value="3">4</option>
-                            <option value="7">8</option>
-                            <option value="15">16</option>
-                            <option value="31">32</option>
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="16">16</option>
+                            <option value="32">32</option>
                         </select>
                     </div>    
                     <div class="text-black-501 border rounded-md py-2 px-2 ">
@@ -69,10 +69,10 @@
                 <div class="flex flex-row items-center">
                     <div class="w-full pr-6">
                         <select name="storage" id="storage" class="pr-11 py-2 border rounded-md w-full" required>
-                            <option value="3">4</option>
-                            <option value="7">8</option>
-                            <option value="15">16</option>
-                            <option value="31">32</option>
+                            <option value="4">4</option>
+                            <option value="8">8</option>
+                            <option value="16">16</option>
+                            <option value="32">32</option>
                             <option value="64">64</option>
                         </select>
                     </div>    

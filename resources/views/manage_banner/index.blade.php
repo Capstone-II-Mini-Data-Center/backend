@@ -14,7 +14,7 @@
                     <thead class="text-blue-500 border border-2">
                         <tr>
                             <th class="w-1/7 py-2 px-4 border-b text-center">Title</th>
-                            <th class="w-2/7 py-2 px-4 border-b text-center">Banner Image</th>
+                            <th class="w-36 py-2 px-4 border-b text-center">Banner Image</th>
                             <th class="w-2/7 py-2 px-4 border-b text-center">Description</th>
                             <th class="w-1/7 py-2 px-4 border-b text-center">Published</th>
                             <th class="w-1/7 py-2 px-2 border-b text-center">Package</th>
@@ -41,8 +41,8 @@
                                         <p>No associated package</p>
                                     @endif
                                 </td>
-                                <td class="py-2 px-4 border-b text-center">
-                                    <div class="flex flex-row">
+                                <td class="py-2 px-4 border-b text-center ">
+                                    <div class="flex flex-row justify-center items-center">
                                         <a href="{{ route('manage_banner.edit', $banner->id) }}" class="mr-3">
                                             <i class="fas fa-edit" style="color: blue;"></i>
                                         </a>

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string("cpu")->nullable()->change();
             $table->string("memory")->nullable()->change();
             $table->string("storage")->nullable()->change();
-            $table->boolean('recommended')->default(false)->nullable()->change();
+            $table->boolean('recommended')->default(false);
             $table->timestamps();
         });
     }

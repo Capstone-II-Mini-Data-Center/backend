@@ -42,9 +42,9 @@
         </div>
         <div class="flex flex-row mt-5 justify-between items-center">
             <div class="text-md text-blue-600 hover:text-blue-400">
-                <a href="{{ route('register') }}">
+                <!-- <a href="{{ route('register') }}">
                     Don't have an account yet?
-                </a>
+                </a> -->
             </div>
             <div>
                 <button class="ms-4 bg-blue-500 p-2 px-6 rounded-lg text-white hover:bg-green-500 transition duration-300">

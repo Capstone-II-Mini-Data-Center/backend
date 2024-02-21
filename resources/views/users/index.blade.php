@@ -48,7 +48,7 @@
                             <td class="py-2 px-4 border-b text-center">{{ $user->phone_number }}</td>
                             <td class="py-2 px-4 border-b text-center flex items-center justify-center">
                                 <button class="flex items-center bg-blue-500 text-white rounded-lg py-2 hover:bg-blue-300">
-                                    <a href="#" class=" text-blue-501 mr-2">
+                                    <a href="{{ route('users.show', $user->id) }}" class=" text-blue-501 mr-2">
                                         <div class="flex justify-between items-center ">
                                             <div class="ml-4">
                                                 Detailed

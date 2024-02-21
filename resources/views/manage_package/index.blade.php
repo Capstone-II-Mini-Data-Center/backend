@@ -11,13 +11,13 @@
                 </form>
             </div>
             <div class="ml-auto mr-4">
-                <form id="filterByRecommendedForm" action="{{ route('manage_package.filterByRecommended') }}" method="GET">
-                    <select name="recommended" onchange="document.getElementById('filterByRecommendedForm').submit()" class="mt-1 border border-gray-400 rounded-md w-full">
+                <!-- <form id="filterByRecommendedForm" action="{{ route('manage_package.filterByRecommended') }}" method="GET">
+                    <select name="recommended" onchange="document.getElementById('filterByRecommendedForm').submit()" class="mt-1 border border-gray-400 rounded-md w-full"> -->
                         <!-- <option value="">All</option> -->
-                        <option value="1">Yes</option>
+                        <!-- <option value="1">Yes</option>
                         <option value="0">No</option>
                     </select>
-                </form>
+                </form> -->
             </div>
             <div class="">
                 <form action="{{ route('manage_package.search') }}" method="GET">
@@ -68,7 +68,7 @@
                             <td class="py-2 px-4 border-b text-center">{{ $package->memory }}</td>
                             <td class="py-2 px-4 border-b text-center">{{ $package->storage }}</td>
                             <td class="py-2 px-4 border-b text-center">{{ $package->recommended? 'Yes' : 'No' }}</td>
-                            <td class="py-2 px-4 border-b text-center flex flex-row">
+                            <td class="py-2 px-4 border-b text-center flex flex-row items-center justify-center">
                                 <a href="{{ route('manage_package.edit', $package->id) }}" class="mr-3">
                                     <i class="fas fa-edit" style="color: blue;"></i>
                                 </a>

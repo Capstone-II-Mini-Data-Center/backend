@@ -56,9 +56,13 @@ Route::delete('/manage/banners/{id}', [BannerController::class, 'destroy'])->nam
 
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{userId}', [UserController::class, 'show'])->name('users.show');
+
 
 Route::get('/orders', [ManageOrderController::class, 'index'])->name('manage_order.index');
-Route::put('/orders/{orderId}/update-status', [ManageOrderController::class, 'updateStatus'])->name('manage_order.update-status');
+Route::put('/manage_order/{orderDetail}/updateStatus',[ManageOrderController::class, 'updateStatus'])->name('manage_order.update-status'); 
+
+// Route::put('/orders/{orderId}/update-status', [ManageOrderController::class, 'updateStatus'])->name('manage_order.update-status');
 Route::get('/manage_order/{orderId}', [ManageOrderController::class, 'show'])->name('manage_order.show');
 
 

@@ -16,6 +16,9 @@ class Package extends Model
     // {
     //     return $this->belongsToMany(User::class, "Order")->withTimestamps()->withPivot(["domain_name", "username", "password", "ip_address", "payment_image", "purchased_date", "expire_date", "status"]);
     // }
+    protected $casts = [
+    'recommended' => 'boolean',
+    ];
 
     protected $fillable = [
         'name',
@@ -35,4 +38,5 @@ class Package extends Model
     {
         return $this->hasOne(Banner::class);
     }
+
 }

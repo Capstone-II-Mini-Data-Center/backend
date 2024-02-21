@@ -27,5 +27,11 @@ class UserController extends Controller
 
         return view('users.index', compact('users', 'admins'));
     }
+
+    public function show($userId)
+    {
+        $user = User::with('orders.order_details.package')->findOrFail($userId);
+        return view('users.show', compact('user'));
+    } 
     
 }
