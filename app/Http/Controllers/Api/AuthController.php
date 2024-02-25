@@ -23,7 +23,7 @@ class AuthController extends Controller
             [
                 'name' => 'required',
                 'email' => 'required|email|unique:users,email',
-                "phone_number" => 'required|min:9|unique:users,phone_number',
+                "phone_number" => 'nullable|min:9|unique:users,phone_number',
                 'password' => 'required|min:6|confirmed',
                 'role' => 'required|in:' . implode(',', ["admin", "user"])
             ]);
