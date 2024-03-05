@@ -12,7 +12,7 @@ class OrderHistoryController extends Controller
     public function getOrderHistory(Request $request)
     {
         try {
-            $orders = Orders::where("user_id", $request->user_id)->with('orderDetails.package')->get();
+            $orders = Orders::where("user_id", $request->user_id)->with('order_details.package')->get();
             if($orders->isEmpty()){
                 return response()->json([
                     "code" => 400,
