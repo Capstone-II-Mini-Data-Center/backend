@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\OrderHistoryController;
 use App\Http\Controllers\Api\CheckoutOrderController;
 use App\Http\Controllers\Api\ChangePasswordController;
 use App\Http\Controllers\Api\GetUserProfileController;
+use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\UpdateProfileController;
 
 /*
@@ -47,3 +48,5 @@ Route::post("/checkoutOrder", [CheckoutOrderController::class, "checkoutOrder"])
 Route::post("/changePassword", [ChangePasswordController::class, "changePassword"]);
 
 Route::post("/updateProfile/{id}", [UpdateProfileController::class, "updateProfile"]);
+
+Route::post("/invoice", [InvoiceController::class, "upload"]);
