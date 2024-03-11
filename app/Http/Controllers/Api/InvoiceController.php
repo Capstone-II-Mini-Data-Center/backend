@@ -46,7 +46,9 @@ class InvoiceController extends Controller
             return response()->json([
                 "code" => 200,
                 "message" => "Invoice uploaded successfully!",
-                "result" => [],
+                "result" => [
+                    "order" => $order
+                ],
                 "error" => null
             ]);
         }

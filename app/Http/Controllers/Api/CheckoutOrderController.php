@@ -44,7 +44,9 @@ class CheckoutOrderController extends Controller
             return response()->json([
                 "code" => 200,
                 "message" => "Checkout order successfully!",
-                "result" => [],
+                "result" => [
+                    "order" => $order
+                ],
                 "error" => null
             ]);
         } catch (Exception $e) {
