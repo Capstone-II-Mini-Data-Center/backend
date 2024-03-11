@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\CheckoutOrderController;
 use App\Http\Controllers\Api\ChangePasswordController;
 use App\Http\Controllers\Api\GetUserProfileController;
 use App\Http\Controllers\Api\InvoiceController;
+use App\Http\Controllers\Api\SendNotificationController;
 use App\Http\Controllers\Api\UpdateProfileController;
 
 /*
@@ -50,3 +51,5 @@ Route::post("/changePassword", [ChangePasswordController::class, "changePassword
 Route::post("/updateProfile/{id}", [UpdateProfileController::class, "updateProfile"]);
 
 Route::post("/invoice", [InvoiceController::class, "upload"]);
+
+Route::get("/sendNotification", [SendNotificationController::class, "sendNotification"]);
