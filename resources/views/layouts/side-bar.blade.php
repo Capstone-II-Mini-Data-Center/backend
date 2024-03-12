@@ -12,7 +12,7 @@
                 </span>
             </div>
             <div>
-                 <a href="#" class="ml-3" >
+                 <a href="{{ route('dashboard') }}" class="ml-3" >
                     Dashboard
                 </a>
             </div>
@@ -64,8 +64,20 @@
             </div>
             <div class="ml-3">
                 <a href="{{ route('manage_order.index') }}">
-                    Manage Order
+                    List Order
                 </a> 
+            </div>
+        </div>
+        <div class="flex flex-row items-center block py-2 px-2  rounded {{ request()->is('report') ? 'bg-blue-500 text-white' : '' }}" >
+            <div class="flex items-center">
+                <span class="material-symbols-outlined">
+                    monitoring
+                </span>
+            </div>
+            <div>
+                 <a href="{{ route('report') }}" class="ml-3" >
+                    Report
+                </a>
             </div>
         </div>
     </div>

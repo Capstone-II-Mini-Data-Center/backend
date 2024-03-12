@@ -6,11 +6,82 @@
     <div class="flex justify-center">
         <div class="w-full max-w-6xl bg-white mt-10 mb-10 ml-12">
             <div class="flex justify-between mb-4">
+                <div>
+                    <h1 class="text-2xl font-semibold" style="color: #3B82F6;">List Order</h1>
+                </div>
+                <div class="flex justify-between items-center ">
+                   <div class="-mr-3 mt-1">
+                        <form method="get" action="{{ route('manage_order.index') }}" class="mb-4" id="dateForm">
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="relative flex items-center">
+                                    <label for="start_date" class="mr-2">From:</label>
+                                    <input type="date" name="start_date" id="start_date" class="rounded-lg p-2 border border-gray-400">
+                                </div>
+                                <div class="relative flex items-center">
+                                    <label for="end_date" class="mr-2">To:</label>
+                                    <input type="date" name="end_date" id="end_date" class="rounded-lg p-2 border border-gray-400">
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="mt-1 flex">
+                        <div>
+                            <form method="get" action="{{ route('manage_order.index') }}" class="mb-4">
+                                <select name="status" onchange="this.form.submit()" class="rounded-lg w-32">
+                                    <option value="">All Status</option>
+                                    <option value="pending" {{ $status === 'pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="in progress" {{ $status === 'in progress' ? 'selected' : '' }}>In Progress</option>
+                                    <option value="delivered" {{ $status === 'delivered' ? 'selected' : '' }}>Delivered</option>
+                                    <option value="expired" {{ $status === 'expired' ? 'selected' : '' }}>Expired</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="ml-2">
+                        <form method="get" action="{{ route('manage_order.index') }}" class="mb-4">
+                            <div class="flex">
+                                <div class="relative flex items-center mt-1 mr-2">
+                                    <select name="plan" class="rounded-lg p-2 border border-gray-400 w-full flex items-center w-32">
+                                        <option value="" {{ $plan === '' ? 'selected' : '' }}>All Plans</option>
+                                        <option value="plan1" {{ $plan === 'plan1' ? 'selected' : '' }}>1month</option>
+                                        <option value="plan2" {{ $plan === 'plan2' ? 'selected' : '' }}>3months</option>
+                                        <option value="plan3" {{ $plan === 'plan3' ? 'selected' : '' }}>6months</option>
+                                        <option value="plan4" {{ $plan === 'plan4' ? 'selected' : '' }}>12months</option>
+                                    </select>
+                                    <button type="submit" class="flex items-center absolute inset-y-0 right-0 px-4 py-2 rounded-md ">
+                                        <!-- <i class="fas fa-filter"></i> -->
+                                    </button>
+                                </div>
+                                <div class="relative flex items-center">
+                                    <input 
+                                        type="text" 
+                                        name="username" 
+                                        id="username" 
+                                        class="mt-1  border border-gray-400 rounded-md w-full pl-3 flex items-center w-40" 
+                                        placeholder="User name..." 
+                                        value="{{ $username }}"
+                                        autocomplete="off"
+                                    >
+                                    <button type="submit" class="flex items-center absolute inset-y-0 right-0 px-4 py-2 rounded-md">
+                                        <i class="fas fa-search"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div> 
             </div>
-            <div class="shadow-lg rounded-xl">
+            <div class="mr-auto">
+                <form method="get" action="{{ route('manage_order.reset-filters') }}">
+                    <button type="submit" class="bg-blue-400 hover:bg-green-300 p-2 rounded-md">Reset</button>
+                </form>
+            </div>
+            <div class="shadow-lg rounded-xl mt-5">
                 <table class="min-w-full border border-collapse rounded-lg overflow-hidden">
                     <thead class="text-blue-500 border border-2 ">
                         <tr>
+                            <th class="w-2/7 py-2 px-4 border-b text-center">No</th>
+                            <th class="w-2/7 py-2 px-4 border-b text-center">User</th>  
                             <th class="w-2/7 py-2 px-4 border-b text-center">Package Name</th>
                             <th class="w-1/7 py-2 px-4 border-b text-center">Unit Price</th>
                             <th class="w-1/7 py-2 px-4 border-b text-center">Discount Amount</th>
@@ -25,6 +96,8 @@
                     <tbody>
                         @foreach($orderDetails as $detail)
                             <tr class="">
+                                <td class="py-2 px-4 border-b text-center">{{ $loop->iteration }}</td>
+                                <td class="py-2 px-4 border-b text-center">{{ $detail->order->user->name }}</td>
                                 <td class="py-2 px-4 border-b text-center">{{ $detail->package_name }}</td>
                                 <td class="py-2 px-4 border-b text-center">${{ number_format($detail->unit_price, 2) }}</td>
                                 <td class="py-2 px-4 border-b text-center">${{ number_format($detail->discount_amount, 2) }}</td>
@@ -37,7 +110,7 @@
                                     <form action="{{ route('manage_order.update-status', $detail->id) }}" method="post">
                                         @csrf
                                         @method('put')
-                                        <select name="status" onchange="this.form.submit()" class="rounded-lg">
+                                        <select name="status" onchange="this.form.submit()" class="rounded-lg w-32">
                                             @if ($detail->status === 'pending')
                                                 <option value="pending">Pending</option>
                                                 <option value="in progress">In Progress</option>
@@ -64,6 +137,10 @@
             </div>
         </div>
     </div>
-
+<script>
+    document.getElementById('end_date').addEventListener('change', function() {
+        document.getElementById('dateForm').submit();
+    });
+</script>
 @endsection
 

@@ -48,6 +48,7 @@
             <table class="w-full border border-collapse rounded-lg overflow-hidden">
                 <thead class="text-blue-500 border border-2">
                     <tr>
+                        <th class="w-3/7 py-2 px-4 border-b text-center">No</th>
                         <th class="w-1/7 py-2 px-4 border-b text-center">Name</th>
                         <!-- <th class="w-2/7 py-2 px-4 border-b text-center">Description</th> -->
                         <th class="w-1/7 py-2 px-4 border-b text-center">Price</th>
@@ -61,6 +62,7 @@
                 <tbody>
                     @foreach($packages as $index => $package)
                         <tr class="border border-2">
+                            <td class="py-2 px-4 border-b text-center">{{ $loop->iteration }}</td>
                             <td class="py-2 px-4 border-b text-center">{{ $package->name }}</td>
                             <!-- <td class="py-2 px-4 border-b">{{ $package->description }}</td> -->
                             <td class="py-2 px-4 border-b text-center">${{ number_format($package->price, 2) }}</td>

@@ -5,6 +5,9 @@ use App\Http\Controllers\PackageController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManageOrderController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReportExportController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,10 +63,22 @@ Route::get('/users/{userId}', [UserController::class, 'show'])->name('users.show
 
 
 Route::get('/orders', [ManageOrderController::class, 'index'])->name('manage_order.index');
-Route::put('/manage_order/{orderDetail}/updateStatus',[ManageOrderController::class, 'updateStatus'])->name('manage_order.update-status'); 
+Route::put('/manage_order/{orderDetail}/updateStatus',[ManageOrderController::class, 'updateStatus'])->name('manage_order.update-status');
+Route::get('/manage_order/reset-filters', [ManageOrderController::class, 'resetFilters'])->name('manage_order.reset-filters');
+
 
 // Route::put('/orders/{orderId}/update-status', [ManageOrderController::class, 'updateStatus'])->name('manage_order.update-status');
 Route::get('/manage_order/{orderId}', [ManageOrderController::class, 'show'])->name('manage_order.show');
+
+
+Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+Route::get('/report', [ReportController::class, 'index'])->name('report');
+Route::get('/report/export/{reportType}', [ReportExportController::class, 'exportCsv'])->name('report.export');
+
+
+
+
 
 
 require __DIR__.'/auth.php';
