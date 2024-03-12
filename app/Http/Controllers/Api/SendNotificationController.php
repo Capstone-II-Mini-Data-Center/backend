@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers\Api;
-use Illuminate\Support\Facades\Http;
+use App\Models\User;
 
 use App\Models\Orders;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use Illuminate\Support\Facades\Http;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class SendNotificationController extends Controller
 {

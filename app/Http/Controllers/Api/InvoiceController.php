@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 
 class InvoiceController extends Controller
 {
@@ -35,12 +36,16 @@ class InvoiceController extends Controller
                 ]);
             }
 
-            $image = $request->file("image");
-            $filename = Str::random(32).".".$image->getClientOriginalExtension();
-            $image->move('uploads/', $filename);
+            $image = $request->file('image');
+
+            // Upload image to Cloudinary
+            $upload = Cloudinary::upload($image->getRealPath())->getSecurePath();
+            // $image = $request->file("image");
+            // $filename = Str::random(32).".".$image->getClientOriginalExtension();
+            // $image->move('uploads/', $filename);
 
             $order->update([
-                'payment_image' => $filename
+                'payment_image' => $upload
             ]);
 
             return response()->json([
