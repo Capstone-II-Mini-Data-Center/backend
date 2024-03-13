@@ -25,7 +25,12 @@ class UserController extends Controller
 
         $users = $query->get();
 
-        return view('users.index', compact('users', 'admins'));
+        if ($request->has('dashboard_view')) {
+            return view('dashboard', compact('admins'));
+        } else {
+            return view('users.index', compact('users', 'admins'));
+        }
+
     }
 
     public function show($userId)
