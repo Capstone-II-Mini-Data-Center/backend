@@ -39,13 +39,13 @@ class InvoiceController extends Controller
             $image = $request->file('image');
 
             // Upload image to Cloudinary
-            $upload = Cloudinary::upload($image->getRealPath())->getSecurePath();
+//            $upload = Cloudinary::upload($image->getRealPath())->getSecurePath();
             // $image = $request->file("image");
-            // $filename = Str::random(32).".".$image->getClientOriginalExtension();
-            // $image->move('uploads/', $filename);
+             $filename = Str::random(32).".".$image->getClientOriginalExtension();
+             $image->move('orders/', $filename);
 
             $order->update([
-                'payment_image' => $upload
+                'payment_image' => 'orders/' . $filename
             ]);
 
             return response()->json([
