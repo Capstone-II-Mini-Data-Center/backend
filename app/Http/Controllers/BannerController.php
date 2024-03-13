@@ -18,7 +18,7 @@ class BannerController extends Controller
     public function create()
     {
         $packages = Package::all();
-        $banner = new Banner(); 
+        $banner = new Banner();
         return view('manage_banner.create', compact('packages','banner'));
     }
 
@@ -28,15 +28,17 @@ class BannerController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'promotion' => 'required',
             'banner_image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'package_id' => 'exists:packages,id',
-            
+
         ]);
 
         $banner = new Banner();
         $banner->title = $request->input('title');
         $banner->description = $request->input('description');
-        
+        $banner->promotion = $request->input('promotion');
+
         if ($request->hasFile('banner_image')) {
             $image = $request->file('banner_image');
             $imageName = time().'.'.$image->getClientOriginalExtension();
@@ -64,6 +66,7 @@ class BannerController extends Controller
         $request->validate([
             'title' => 'required',
             'description' => 'required',
+            'promotion' => 'required',
             'banner_image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             // 'published' => 'boolean',
             'package_id' => 'exists:packages,id',
@@ -74,7 +77,8 @@ class BannerController extends Controller
         $packages = Package::all();
         $banner->title = $request->input('title');
         $banner->description = $request->input('description');
-        
+        $banner->promotion = $request->input('promotion');
+
         if ($request->hasFile('banner_image')) {
             $image = $request->file('banner_image');
             $imageName = time().'.'.$image->getClientOriginalExtension();
