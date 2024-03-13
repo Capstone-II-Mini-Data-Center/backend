@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use Exception;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -17,8 +18,8 @@ class UpdateProfileController extends Controller
             $validateUser = Validator::make($request->all(),
             [
                 'name' => 'required',
-                'email' => 'required|email|unique:users,email',
-                "phone_number" => 'nullable|min:9|unique:users,phone_number',
+                'email' => 'required|email|unique:users,email,' . $id,
+                "phone_number" => 'nullable|min:9|unique:users,phone_number,' . $id,
             ]);
 
             if($validateUser->fails()){
