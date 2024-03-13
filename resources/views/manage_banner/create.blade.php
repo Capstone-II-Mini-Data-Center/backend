@@ -17,6 +17,11 @@
             </div>
 
             <div class="mb-4">
+                <label for="promotion" class="block text-sm font-medium text-gray-700">Promotion</label>
+                <input type="number" name="promotion" id="promotion" class="mt-1 p-2 border rounded-md w-full" required>
+            </div>
+
+            <div class="mb-4">
                 <label for="description" class="block text-sm font-medium text-gray-700">Description</label>
                 <textarea name="description" id="description" rows="4" class="mt-1 p-2 border rounded-md w-full" required></textarea>
             </div>

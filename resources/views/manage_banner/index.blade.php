@@ -16,6 +16,7 @@
                             <th class="w-3/7 py-2 px-4 border-b text-center">No</th>
                             <th class="w-1/7 py-2 px-4 border-b text-center">Title</th>
                             <th class="w-36 py-2 px-4 border-b text-center">Banner Image</th>
+                            <th class="w-36 py-2 px-4 border-b text-center">Promotion</th>
                             <th class="w-2/7 py-2 px-4 border-b text-center">Description</th>
                             <th class="w-1/7 py-2 px-4 border-b text-center">Published</th>
                             <th class="w-1/7 py-2 px-2 border-b text-center">Package</th>
@@ -34,6 +35,7 @@
                                         No Image
                                     @endif
                                 </td>
+                                <td class="py-2 px-4 border-b text-center">{{ $banner->promotion }}</td>
                                 <td class="py-2 px-4 border-b">{{ $banner->description }}</td>
                                 <td class="py-2 px-4 border-b text-center">{{ $banner->published ? 'Yes' : 'No' }}</td>
                                 <td class="py-2 px-2 border-b text-center">
