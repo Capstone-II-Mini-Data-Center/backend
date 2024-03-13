@@ -120,7 +120,8 @@ class AuthController extends Controller
                 "message" => "User Logged In Successfully",
                 'result' => [
                     "token" => $token,
-                    "token_expired" => $formattedDate
+                    "token_expired" => $formattedDate,
+                    "user_id" => $user->id
                 ],
                 'error' => null,
             ], 200);
