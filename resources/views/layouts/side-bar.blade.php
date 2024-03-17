@@ -74,7 +74,7 @@
                     monitoring
                 </span>
             </div>
-            <div>
+            <div class="">
                  <a href="{{ route('report') }}" class="ml-3" >
                     Report
                 </a>
