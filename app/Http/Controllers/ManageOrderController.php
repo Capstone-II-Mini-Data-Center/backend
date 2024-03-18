@@ -7,6 +7,10 @@ use App\Models\Orders;
 use App\Models\OrderDetails;  
 use App\Models\User;
 use Carbon\Carbon; 
+use App\Mail\SendMail;
+use Illuminate\Support\Facades\Mail;
+
+
 
 class ManageOrderController extends Controller
 {
@@ -69,9 +73,14 @@ class ManageOrderController extends Controller
         $request->validate([
             'status' => 'required|in:pending,in progress,delivered,expired',
         ]);
-
+        $previousStatus = $orderDetail->status;
         $orderDetail->status = $request->input('status');
         $orderDetail->save();
+        
+        if ($orderDetail->status === 'delivered' && $previousStatus !== 'delivered') {
+        $userEmail = $orderDetail->order->user->email;
+        Mail::to($userEmail)->send(new SendMail($orderDetail->package_name));
+        }
 
         return redirect()->route('manage_order.index')->with('success', 'Order status updated successfully.');
     }

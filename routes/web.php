@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\ReportExportController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,9 +73,18 @@ Route::get('/manage_order/{orderId}', [ManageOrderController::class, 'show'])->n
 
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+// Route::get('/dashboard/revenue', [DashboardController::class, 'getTotalRevenueChartData'])->name('dashboard.revenue');
+// Route::post('/getTotalRevenueChartData', [DashboardController::class, 'getTotalRevenueChartData'])->name('getTotalRevenueChartData');
+Route::get('/revenue-data', [DashboardController::class, 'revenueData'])->name('revenue.data');
+
+
 
 Route::get('/report', [ReportController::class, 'index'])->name('report');
 Route::get('/report/export/{reportType}', [ReportExportController::class, 'exportCsv'])->name('report.export');
+
+// Route::get('/email', function () {
+//     Mail::to('sreynitsn69@gmail.com')->send(new HostingCredential);
+// });
 
 
 

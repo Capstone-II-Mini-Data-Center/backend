@@ -1,46 +1,48 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\OrderDetails;
-use App\Models\Orders;
-use Illuminate\Support\Facades\DB;
 use App\Models\Package;
-use Carbon\Carbon;
 use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    public function index()
-    {   
+    public function index(Request $request)
+    {
+        $selectedFilter = $request->input('dateFilter', 'year');
         $usersWithOrdersCount = $this->countUsersWithOrders();
         $allPackagesCount = $this->countAllPackages();
         $allOrdersCount = $this->countAllOrders();
         $topPackagesData = $this->getTopPackagesData();
         $totalRevenue = $this->getTotalRevenue();
+        // $revenueData = $this->getOrderRevenueData($request->input('filter', 'year'));
+        $revenueData = $this->generateMockRevenueData($request->input('dateFilter', 'year'));
 
-        $date = now()->toDateString();
-        $totalRevenueData = $this->getTotalRevenueForDate($date);
-        // $totalRevenueData = $this->getTotalRevenueForDate();
-        return view('dashboard', compact('usersWithOrdersCount','allPackagesCount','allOrdersCount','topPackagesData','totalRevenue','totalRevenueData'));
-    } 
+        
+        
+// dd($revenueData);
+// dd($revenueData);
+
+        return view('dashboard', compact('usersWithOrdersCount', 'allPackagesCount', 'allOrdersCount', 'topPackagesData', 'totalRevenue','revenueData','selectedFilter'));
+    }
+
     public function countUsersWithOrders()
     {
-        $usersWithOrdersCount = User::has('orders')->count();
-
-        return $usersWithOrdersCount;
+        return User::has('orders')->count();
     }
 
     public function countAllPackages()
     {
-        $allPackagesCount = Package::count();
-
-        return $allPackagesCount;
+        return Package::count();
     }
+
     public function countAllOrders()
     {
-        $allOrdersCount = OrderDetails::count();
-
-        return $allOrdersCount;
+        return OrderDetails::count();
     }
 
     public function getTopPackagesData()
@@ -68,26 +70,63 @@ class DashboardController extends Controller
             return $package->order_details_count * $package->price;
         });
     }
+   
 
-    public function getTotalRevenueForDate($date)
+
+
+    private function generateMockRevenueData($filter)
     {
-        $startOfDay = Carbon::parse($date)->startOfDay();
-        $endOfDay = Carbon::parse($date)->endOfDay();
+        // Mocking revenue data for demonstration
+        $revenueData = [];
+        $startDate = null;
+        $endDate = null;
 
-        $totalRevenueData = Orders::whereHas('order_details.package', function ($query) {
-                $query->select('packages.id');
-            })
-            ->whereBetween('created_at', [$startOfDay, $endOfDay])
-            ->with(['orderDetails.package'])
-            ->get()
-            ->sum(function ($order) {
-                return $order->order_details->sum(function ($order_detail) {
-                    return $order_detail->package->price * $order_detail->quantity;
-                });
-            });
+        switch ($filter) {
+            case 'today':
+                $startDate = now()->startOfDay();
+                $endDate = now()->endOfDay();
+                break;
+            case 'this_month':
+                $startDate = now()->startOfMonth();
+                $endDate = now()->endOfMonth();
+                break;
+            case 'last_month':
+                $startDate = now()->subMonth()->startOfMonth();
+                $endDate = now()->subMonth()->endOfMonth();
+                break;
+            case 'six_months':
+                $startDate = now()->subMonths(6)->startOfMonth();
+                $endDate = now()->endOfMonth();
+                break;
+            case 'year':
+            default:
+                $startDate = now()->startOfYear();
+                $endDate = now()->endOfYear();
+                break;
+        }
 
-        return $totalRevenueData;
+        
+
+        // Generate random revenue data for each day within the selected range
+        // for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
+        //     $revenueData[$date->format('Y-m-d')] = rand(1000, 5000); // Random revenue value
+        // }
+
+        if ($filter === 'six_months' || $filter === 'year') {
+        $start = $startDate->copy();
+        while ($start->lte($endDate)) {
+            $revenueData[$start->formatLocalized('%B %Y')] = rand(1000, 5000); // Random revenue value for the month
+            $start->addMonth();
+        }
+        } else {
+            // Generate random revenue data for each day within the selected range
+            for ($date = $startDate; $date->lte($endDate); $date->addDay()) {
+                $revenueData[$date->format('Y-m-d')] = rand(1000, 5000); // Random revenue value for the day
+            }
     }
+        
 
+        return $revenueData;
+    }
+    
 }
-
