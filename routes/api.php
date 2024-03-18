@@ -12,6 +12,7 @@ use App\Http\Controllers\Api\GetUserProfileController;
 use App\Http\Controllers\Api\InvoiceController;
 use App\Http\Controllers\Api\SendNotificationController;
 use App\Http\Controllers\Api\UpdateProfileController;
+use App\Http\Controllers\Api\ProxmoxController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,3 +54,9 @@ Route::post("/updateProfile/{id}", [UpdateProfileController::class, "updateProfi
 Route::post("/invoice", [InvoiceController::class, "upload"]);
 
 Route::get("/sendNotification", [SendNotificationController::class, "sendNotification"]);
+
+Route::post('/container/create', [ProxmoxController::class, 'createContainer']);
+
+Route::post('/container/start/{vmid}', [ProxmoxController::class, 'startContainer']);
+
+Route::post('/container/stop/{vmid}', [ProxmoxController::class, 'stopContainer']);
