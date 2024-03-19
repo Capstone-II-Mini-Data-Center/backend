@@ -47,7 +47,7 @@
                 </a> -->
             </div>
             <div>
-                <button class="ms-4 bg-blue-500 p-2 px-6 rounded-lg text-white hover:bg-green-500 transition duration-300">
+                <button class="ms-4 bg-blue-500 p-2 px-6 rounded-lg text-white hover:bg-blue-400 transition duration-300">
                     {{ __('Log in') }}
                 </button>
             </div>

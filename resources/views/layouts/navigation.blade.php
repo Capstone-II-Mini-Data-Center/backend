@@ -4,20 +4,28 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="flex justify-between">
                 <!-- Logo -->
-                <div class="w-24  -mt-4">
-                    <div class="">
-                        <a href="{{ route('dashboard') }}">
+                <div class="">
+                    <div class="flex justify-between gap-3">
+                        <div class="w-24 mt-1">
+                            <a href="{{ route('dashboard') }}">
+                                <img src="{{ asset('images/logo.png') }}" alt="Logo" width="">
+                            </a> 
+                        </div>
+                        <!-- <a href="{{ route('dashboard') }}">
                             <img src="{{ asset('images/logo.png') }}" alt="Logo" >
-                        </a>
+                        </a> -->
+                        <div class="flex items-center mt-1 text-xl font-bold" style="color: #3B82F6;" >
+                            CloudBloc
+                        </div>
                     </div>
                 </div>
                 <div>
                     <div class="profile" id="profileDropdown" onclick="toggleDropdown()">
-                        <img src="{{ asset('images/user.png') }}" alt="User">
+                        <img src="{{ asset('images/user.png') }}" alt="User" class="w-10">
                     </div>
-                        <div class="admin_name">
+                        <div class="admin_name text-lg" style="color: #3B82F6;">
                             {{$admins->name}}
                         </div>
                 </div>
@@ -25,10 +33,10 @@
             </div>
             <div class="hidden mt-20 -mr-4 sm:flex sm:items-center sm:ms-6" id="dropdown">
                 <div class="dropdown_content hidden bg-gray-100 rounded-md pl-5 pr-5 pb-2 pt-2">
-                    <!-- <a href="{{ route('profile.edit') }}" class="hover:text-gray-300">Profile</a> -->
+                    <a href="{{ route('profile.edit') }}" class=" text-blue-500 hover:text-orange-300" >Profile</a>
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
-                        <button onclick="event.preventDefault(); this.closest('form').submit();" class="hover:text-gray-300">Log Out</button>
+                        <button onclick="event.preventDefault(); this.closest('form').submit();" class="text-blue-500 hover:text-orange-300">Log Out</button>
                     </form>
                 </div>
             </div>
@@ -36,8 +44,7 @@
             <script>
                 function toggleDropdown() {
                     var dropdownContent = document.querySelector('.dropdown_content');
-                    dropdownContent.classList.toggle('hidden');
-                  
+                    dropdownContent.classList.toggle('hidden');             
                 }
             </script>
             
@@ -93,10 +100,10 @@
 <style>
     .profile{
         position: absolute;
-        top:7px;
-        right:40px;
-        width: 50px;
-        height: 50px;
+        top:10px;
+        right:50px;
+        width: 40px;
+        height: 40px;
         border-radius: 100%;
         box-shadow: 0 4px 8px rgba(128, 128, 128, 0.5); 
         /* background-color: red;  */
@@ -105,6 +112,6 @@
     .admin_name{
         position: absolute;
         right:100px;
-        top: 20px;
+        top: 18px;
     }
 </style>

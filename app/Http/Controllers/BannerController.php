@@ -9,12 +9,26 @@ use Illuminate\Http\Request;
 
 class BannerController extends Controller
 {
-    public function index()
-    {
-        $banners = Banner::with('package')->get();
+    public function index(Request $request)
+    { 
+        $query = Banner::with('package');
+
+        if ($request->filled('published')) {
+            $published = $request->input('published') === 'true'; 
+            $query->where('published', $published);
+        }     
+        
+       $banners = $query->get(); 
         return view('manage_banner.index', compact('banners'));
     }
 
+    public function show($id)
+    {
+        $banner = Banner::findOrFail($id);
+        return view('manage_banner.show', compact('banner'));
+    }
+
+    
     public function create()
     {
         $packages = Package::all();

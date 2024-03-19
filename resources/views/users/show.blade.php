@@ -20,9 +20,10 @@
                 @foreach ($user->orders as $order)
                     <div class="mb-4 rounded-lg shadow-lg py-3 px-5">
                         <h2 class="text-xl font-semibold mb-2" style="color: #3B82F6;">Order ID: {{ $order->id }}</h2>
-                        <table class="w-full mb-4 border border-collapse border-gray-300 rounded">
+                        <table class="w-full mb-4">
                             <thead>
-                                <tr class="border bg-blue-100">
+                                <tr class="bg-blue-50" style="color: #3B82F6;"  >
+                                    <th class="py-2 px-4 border-b text-left">No</th>
                                     <th class="py-2 px-4 border-b text-left">Package Name</th>
                                     <th class="py-2 px-4 border-b text-left">Unit Price</th>
                                     <th class="py-2 px-4 border-b text-left">Discount Amount</th>
@@ -36,6 +37,7 @@
                             <tbody>
                                 @forelse ($order->order_details as $orderDetail)
                                     <tr>
+                                        <td class="py-2 px-4 border-b text-center">{{ $loop->iteration }}</td>
                                         <td class="py-2 px-4 border-b">{{ $orderDetail->package->name }}</td>
                                         <td class="py-2 px-4 border-b">{{ $orderDetail->unit_price }}</td>
                                         <td class="py-2 px-4 border-b">{{ $orderDetail->discount_amount }}</td>

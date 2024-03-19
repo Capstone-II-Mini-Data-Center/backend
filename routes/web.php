@@ -46,6 +46,8 @@ Route::post('/manage/packages', [PackageController::class, 'store'])->name('mana
 Route::get('/manage/packages/{id}/edit', [PackageController::class, 'edit'])->name('manage_package.edit');
 Route::put('/manage/packages/{id}', [PackageController::class, 'update'])->name('manage_package.update');
 Route::delete('/manage/packages/{id}', [PackageController::class, 'destroy'])->name('manage_package.destroy');
+Route::get('/manage_package/{package}', 'PackageController@show')->name('manage_package.show');
+Route::get('/manage_package/{package}', [PackageController::class, 'show'])->name('manage_package.show');
 Route::get('/manage/packages/search', [PackageController::class, 'search'])->name('manage_package.search');
 Route::get('/manage/packages/filterByRecommended', [PackageController::class, 'filterByRecommended'])->name('manage_package.filterByRecommended');
 Route::get('/manage/packages/filterByPriceRange', [PackageController::class, 'filterByPriceRange'])->name('manage_package.filterByPriceRange');
@@ -57,6 +59,8 @@ Route::post('/manage/banners', [BannerController::class, 'store'])->name('manage
 Route::get('/manage/banners/{id}/edit', [BannerController::class, 'edit'])->name('manage_banner.edit');
 Route::put('/manage/banners/{id}', [BannerController::class, 'update'])->name('manage_banner.update');
 Route::delete('/manage/banners/{id}', [BannerController::class, 'destroy'])->name('manage_banner.destroy');
+Route::get('/manage_banner/{banner}', [BannerController::class, 'show'])->name('manage_banner.show');
+
 
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');

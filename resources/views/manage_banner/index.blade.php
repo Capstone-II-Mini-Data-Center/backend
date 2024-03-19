@@ -4,28 +4,43 @@
 
 @section('content')
     <div class="flex justify-center">
-        <div class="w-full max-w-6xl bg-white mt-10 mb-10 ml-12">
-            <div class="flex justify-between mb-4">
+        <div class="w-full max-w-6xl bg-white mb-10 ml-12">
+            <div class="flex justify-between py-3 px-6 border-b-2">
                 <h1 class="text-2xl font-semibold" style="color: #3B82F6;">Banner Page</h1>
                 <a href="{{ route('manage_banner.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded-md">Create Banner</a>
             </div>
-            <div class="shadow-lg rounded-xl">
-                <table class="min-w-full border border-collapse rounded-lg overflow-hidden">
-                    <thead class="text-blue-500 border border-2">
+            <div class="py-3 px-6 flex justify-between">
+                <div class=""></div>
+                <form id="filterForm" action="{{ route('manage_banner.index') }}" method="GET">
+                    <div class="">
+                        Filter Status
+                    </div>
+                    <div class="relative flex items-center">
+                        <select name="published" id="published" class="border border-gray-400 w-48 rounded-md" onchange="submitForm()">
+                            <option value="">All</option>
+                            <option value="true"{{ request('published') === 'true' ? ' selected' : '' }}>Published</option>
+                            <option value="false"{{ request('published') === 'false' ? ' selected' : '' }}>Not Published</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="shadow-lg rounded-xl px-5 py-5 border">
+                <table class="min-w-full rounded-lg overflow-hidden">
+                    <thead class="text-blue-500 ">
                         <tr>
                             <th class="w-3/7 py-2 px-4 border-b text-center">No</th>
                             <th class="w-1/7 py-2 px-4 border-b text-center">Title</th>
                             <th class="w-36 py-2 px-4 border-b text-center">Banner Image</th>
                             <th class="w-36 py-2 px-4 border-b text-center">Promotion</th>
                             <th class="w-2/7 py-2 px-4 border-b text-center">Description</th>
-                            <th class="w-1/7 py-2 px-4 border-b text-center">Published</th>
+                            <th class="w-1/7 py-2 px-4 border-b text-center">Status</th>
                             <th class="w-1/7 py-2 px-2 border-b text-center">Package</th>
                             <th class="w-1/7 py-2 px-4 border-b text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($banners as $banner)
-                            <tr class="border border-2">
+                            <tr>
                                 <td class="py-2 px-4 border-b text-center">{{ $loop->iteration }}</td>
                                 <td class="py-2 px-4 border-b text-center">{{ $banner->title }}</td>
                                 <td class="py-2 px-4 border-b text-center">
@@ -37,7 +52,11 @@
                                 </td>
                                 <td class="py-2 px-4 border-b text-center">{{ $banner->promotion }}</td>
                                 <td class="py-2 px-4 border-b">{{ $banner->description }}</td>
-                                <td class="py-2 px-4 border-b text-center">{{ $banner->published ? 'Yes' : 'No' }}</td>
+                                <td class="py-2 px-4 border-b text-center">
+                                    <button type="" class="{{ $banner->published ? 'bg-green-200' : 'bg-red-200'}} py-1 px-2 rounded-md text-xs">
+                                        {{ $banner->published ? 'Published' : 'Not Published' }} 
+                                    </button>
+                                </td>
                                 <td class="py-2 px-2 border-b text-center">
                                     @if($banner->package)
                                         <p>{{ $banner->package->name }}</p>
@@ -47,18 +66,18 @@
                                 </td>
                                 <td class="py-2 px-4 border-b text-center ">
                                     <div class="flex flex-row justify-center items-center">
-                                        <a href="{{ route('manage_banner.edit', $banner->id) }}" class="mr-3">
+                                        <a href="{{ route('manage_banner.edit', $banner->id) }}" class="mr-3" title="Edit">
                                             <i class="fas fa-edit" style="color: blue;"></i>
                                         </a>
                                         <form id="deleteForm" action="{{ route('manage_banner.destroy', $banner->id) }}" method="post">
                                             @csrf
                                             @method('delete')
-                                            <button type="button" class="text-red-500 hover:text-red-700" onclick="confirmDelete('{{ $banner->id }}')">
+                                            <button type="button" class="text-red-500 hover:text-red-700" onclick="confirmDelete('{{ $banner->id }}')" title="Delete">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
-                                        <a href="#" class=" text-blue-501 mr-2">
-                                            <div class=" flex justify-center items-center ml-3 mt-1">
+                                        <a href="{{ route('manage_banner.show', $banner->id) }}" class=" text-blue-501 mr-2">
+                                            <div class=" flex justify-center items-center ml-3 " title="View Detail">
                                                 <i class="fa-regular fa-file-lines" style="color: blue;"></i>
                                             </div>
                                         </a>
@@ -82,4 +101,9 @@
             }
         }
     </script>
+    <script>
+    function submitForm() {
+        document.getElementById("filterForm").submit();
+    }
+</script>
 @endsection
