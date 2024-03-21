@@ -11,12 +11,12 @@ class PackageController extends Controller
     public function index()
     {
         $packages = Package::all();
-        return view('manage_package.index', compact('packages'));
+        return view('packages.index', compact('packages'));
     }
 
     public function create()
     {
-        return view('manage_package.create');
+        return view('packages.create');
     }
 
     public function store(Request $request)
@@ -39,14 +39,14 @@ class PackageController extends Controller
         // $packageData['recommended'] = $request->has('recommended');
 
 
-        return redirect()->route('manage_package.index')->with('success', 'Package created successfully');
+        return redirect()->route('packages.index')->with('success', 'Package created successfully');
     }
 
     public function edit($id)
     {
         $package = Package::findOrFail($id);
 
-        return view('manage_package.edit', compact('package'));
+        return view('packages.edit', compact('package'));
     }
 
     public function update(Request $request, $id)
@@ -70,15 +70,15 @@ class PackageController extends Controller
         $package->recommended = $request->filled('recommended');
         $package->save();
 
-        return redirect()->route('manage_package.index')->with('success', 'Package updated successfully');
+        return redirect()->route('packages.index')->with('success', 'Package updated successfully');
     }
-    
+
     public function destroy($id)
 {
     $package = Package::findOrFail($id);
     $package->delete();
 
-    return redirect()->route('manage_package.index')->with('success', 'Package deleted successfully');
+    return redirect()->route('packages.index')->with('success', 'Package deleted successfully');
 }
 
 public function search(Request $request)
@@ -86,7 +86,7 @@ public function search(Request $request)
     $search = $request->input('name');
     $packages = Package::where('name', 'like', '%' . $search . '%')->get();
 
-    return view('manage_package.index', compact('packages'));
+    return view('packages.index', compact('packages'));
 }
 
 public function filterByRecommended(Request $request)
@@ -94,7 +94,7 @@ public function filterByRecommended(Request $request)
     $recommended = $request->input('recommended');
     $packages = Package::where('recommended', $recommended)->get();
 
-    return view('manage_package.index', compact('packages'));
+    return view('packages.index', compact('packages'));
 }
 
 public function filterByPriceRange(Request $request)
@@ -104,10 +104,10 @@ public function filterByPriceRange(Request $request)
 
     $packages = Package::whereBetween('price', [$minPrice, $maxPrice])->get();
 
-    return view('manage_package.index', compact('packages'));
+    return view('packages.index', compact('packages'));
 }
 
 
 
-    
+
 }

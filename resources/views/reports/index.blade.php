@@ -12,12 +12,12 @@
                  <div class="flex items-center space-x-4 ">
                     <label for="reportType" class="text-lg">Select Report:</label>
                     <select id="reportType" class="border rounded-md p-3" onchange="location = this.value;">
-                        <option value="{{ route('report', ['reportType' => 'user_report']) }}" @if($reportType === 'user_report') selected @endif>User Report</option>
-                        <option value="{{ route('report', ['reportType' => 'package_report']) }}" @if($reportType === 'package_report') selected @endif>Package Report</option>
+                        <option value="{{ route('reports.index', ['reportType' => 'user_report']) }}" @if($reportType === 'user_report') selected @endif>User Report</option>
+                        <option value="{{ route('reports.index', ['reportType' => 'package_report']) }}" @if($reportType === 'package_report') selected @endif>Package Report</option>
                     </select>
                     <div>
                         <button class="p-3 bg-green-300 rounded-md">
-                            <a href="{{ route('report.export', ['reportType' => $reportType]) }}">Export to CSV</a> 
+                            <a href="{{ route('reports.export', ['reportType' => $reportType]) }}">Export to CSV</a>
                         </button>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                     </table>
                 </div>
             @elseif ($reportType === 'package_report')
-                <!-- Package Report -->
+                <!-- Package reports -->
                 <div class="shadow-lg rounded-xl mt-4">
                     <table class="min-w-full border border-collapse rounded-lg overflow-hidden">
                         <thead class="text-blue-500 border border-2">

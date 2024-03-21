@@ -1,4 +1,4 @@
-<!-- resources/views/manage_package/edit.blade.php -->
+<!-- resources/views/packages/edit.blade.php -->
 
 @extends('layouts.app')
 
@@ -6,11 +6,11 @@
     <div class="w-6/7 bg-white mr-10 ml-10">
         <h1 class="text-2xl font-semibold mb-6">Edit Package</h1>
     </div>
-    <div class="w-6/7 bg-white mr-10 ml-10 flex justify-center">        
-        <form action="{{ route('manage_package.update', $package->id) }}" method="post" class="w-1/2 p-10 bg-gray-100 shadow-lg rounded-xl">
+    <div class="w-6/7 bg-white mr-10 ml-10 flex justify-center">
+        <form action="{{ route('packages.update', $package->id) }}" method="post" class="w-1/2 p-10 bg-gray-100 shadow-lg rounded-xl">
             @csrf
             @method('put') <!-- Use the "put" method for updates -->
-            
+
             <div class="mb-4">
                 <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
                 <input type="text" name="name" id="name" class="mt-1 p-2 border rounded-md w-full" value="{{ old('name', $package->name) }}" required>
@@ -41,7 +41,7 @@
                             <option value="16">16</option>
                             <option value="32">32</option>
                         </select>
-                    </div>    
+                    </div>
                     <div class="text-black-500 border rounded-md py-2 px-2 ">
                         VCN
                     </div>
@@ -58,7 +58,7 @@
                             <option value="16">16</option>
                             <option value="32">32</option>
                         </select>
-                    </div>    
+                    </div>
                     <div class="text-black-501 border rounded-md py-2 px-2 ">
                         GB
                     </div>
@@ -76,7 +76,7 @@
                             <option value="32">32</option>
                             <option value="64">64</option>
                         </select>
-                    </div>    
+                    </div>
                     <div class="text-black-501 border rounded-md py-2 px-2 ">
                         GB
                     </div>

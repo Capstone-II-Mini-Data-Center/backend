@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Package;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ReportController extends Controller
 {
@@ -20,25 +21,25 @@ class ReportController extends Controller
                     'orders' => function ($query) {
                         $query->with([
                             'order_details' => function ($query) {
-                                $query->select('order_id', \DB::raw('count(*) as package_count'))
+                                $query->select('order_id', DB::raw('count(*) as package_count'))
                                     ->groupBy('order_id');
                             }
                         ]);
                     }
-                ])
-                ->get();
+                ]);
+//                ->get();
 
             $totalUsers = $users->count();
 
-            return view('report.index', compact('users', 'totalUsers', 'reportType'));
+            return view('reports.index', compact('users', 'totalUsers', 'reportType'));
         } elseif ($reportType === 'package_report') {
             $packages = Package::withCount('order_details')
                 ->get();
 
             $totalPackagesSold = $packages->sum('order_details_count');
 
-            return view('report.index', compact('packages', 'totalPackagesSold', 'reportType'));
+            return view('reports.index', compact('packages', 'totalPackagesSold', 'reportType'));
         }
-
+return null;
     }
 }

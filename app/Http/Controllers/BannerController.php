@@ -12,14 +12,14 @@ class BannerController extends Controller
     public function index()
     {
         $banners = Banner::with('package')->get();
-        return view('manage_banner.index', compact('banners'));
+        return view('banners.index', compact('banners'));
     }
 
     public function create()
     {
         $packages = Package::all();
         $banner = new Banner();
-        return view('manage_banner.create', compact('packages','banner'));
+        return view('banners.create', compact('packages','banner'));
     }
 
     public function store(Request $request)
@@ -50,14 +50,14 @@ class BannerController extends Controller
         $banner->package_id = $request->input('package_id');
         $banner->save();
 
-        return redirect()->route('manage_banner.index')->with('success', 'Banner created successfully');
+        return redirect()->route('banners.index')->with('success', 'Banner created successfully');
     }
 
     public function edit($id)
     {
         $banner = Banner::findOrFail($id);
         $packages = Package::all();
-        return view('manage_banner.edit', compact('banner', 'packages'));
+        return view('banners.edit', compact('banner', 'packages'));
 
     }
 
@@ -90,7 +90,7 @@ class BannerController extends Controller
         $banner->package_id = $request->input('package_id');
         $banner->save();
 
-        return redirect()->route('manage_banner.index')->with('success', 'Banner updated successfully');
+        return redirect()->route('banners.index')->with('success', 'Banner updated successfully');
     }
 
     public function destroy($id)
@@ -98,6 +98,6 @@ class BannerController extends Controller
         $banner = Banner::findOrFail($id);
         $banner->delete();
 
-        return redirect()->route('manage_banner.index')->with('success', 'Banner deleted successfully');
+        return redirect()->route('banners.index')->with('success', 'Banner deleted successfully');
     }
 }

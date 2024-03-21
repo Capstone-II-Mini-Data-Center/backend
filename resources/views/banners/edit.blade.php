@@ -1,4 +1,4 @@
-<!-- resources/views/manage_banner/edit.blade.php -->
+<!-- resources/views/banners/edit.blade.php -->
 
 @extends('layouts.app')
 
@@ -8,7 +8,7 @@
     </div>
     <div class="w-6/7 bg-white mr-10 ml-10 flex justify-center">
         <!-- <h1 class="text-2xl font-semibold mb-6" style="color: #3B82F6;">Edit Banner</h1> -->
-        <form action="{{ route('manage_banner.update', $banner->id) }}" method="post" enctype="multipart/form-data" class="w-1/2 p-10 bg-gray-100 shadow-lg rounded-xl">
+        <form action="{{ route('banners.update', $banner->id) }}" method="post" enctype="multipart/form-data" class="w-1/2 p-10 bg-gray-100 shadow-lg rounded-xl">
 
             @csrf
             @method('put') <!-- Use the "put" method for updates -->

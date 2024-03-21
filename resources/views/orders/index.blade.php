@@ -1,4 +1,4 @@
-<!-- resources/views/manage_order/show.blade.php -->
+<!-- resources/views/orders/show.blade.php -->
 
 @extends('layouts.app')
 
@@ -11,7 +11,7 @@
                 </div>
                 <div class="flex justify-between items-center ">
                    <div class="-mr-3 mt-1">
-                        <form method="get" action="{{ route('manage_order.index') }}" class="mb-4" id="dateForm">
+                        <form method="get" action="{{ route('orders.index') }}" class="mb-4" id="dateForm">
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="relative flex items-center">
                                     <label for="start_date" class="mr-2">From:</label>
@@ -26,7 +26,7 @@
                     </div>
                     <div class="mt-1 flex">
                         <div>
-                            <form method="get" action="{{ route('manage_order.index') }}" class="mb-4">
+                            <form method="get" action="{{ route('orders.index') }}" class="mb-4">
                                 <select name="status" onchange="this.form.submit()" class="rounded-lg w-32">
                                     <option value="">All Status</option>
                                     <option value="pending" {{ $status === 'pending' ? 'selected' : '' }}>Pending</option>
@@ -38,7 +38,7 @@
                         </div>
                     </div>
                     <div class="ml-2">
-                        <form method="get" action="{{ route('manage_order.index') }}" class="mb-4">
+                        <form method="get" action="{{ route('orders.index') }}" class="mb-4">
                             <div class="flex">
                                 <div class="relative flex items-center mt-1 mr-2">
                                     <select name="plan" class="rounded-lg p-2 border border-gray-400 w-full flex items-center w-32">
@@ -53,12 +53,12 @@
                                     </button>
                                 </div>
                                 <div class="relative flex items-center">
-                                    <input 
-                                        type="text" 
-                                        name="username" 
-                                        id="username" 
-                                        class="mt-1  border border-gray-400 rounded-md w-full pl-3 flex items-center w-40" 
-                                        placeholder="User name..." 
+                                    <input
+                                        type="text"
+                                        name="username"
+                                        id="username"
+                                        class="mt-1  border border-gray-400 rounded-md w-full pl-3 flex items-center w-40"
+                                        placeholder="User name..."
                                         value="{{ $username }}"
                                         autocomplete="off"
                                     >
@@ -69,10 +69,10 @@
                             </div>
                         </form>
                     </div>
-                </div> 
+                </div>
             </div>
             <div class="mr-auto">
-                <form method="get" action="{{ route('manage_order.reset-filters') }}">
+                <form method="get" action="{{ route('orders.reset-filters') }}">
                     <button type="submit" class="bg-blue-400 hover:bg-green-300 p-2 rounded-md">Reset</button>
                 </form>
             </div>
@@ -81,7 +81,7 @@
                     <thead class="text-blue-500 border border-2 ">
                         <tr>
                             <th class="w-2/7 py-2 px-4 border-b text-center">No</th>
-                            <th class="w-2/7 py-2 px-4 border-b text-center">User</th>  
+                            <th class="w-2/7 py-2 px-4 border-b text-center">User</th>
                             <th class="w-2/7 py-2 px-4 border-b text-center">Package Name</th>
                             <th class="w-1/7 py-2 px-4 border-b text-center">Unit Price</th>
                             <th class="w-1/7 py-2 px-4 border-b text-center">Discount Amount</th>
@@ -107,7 +107,7 @@
                                 <td class="py-2 px-4 border-b text-center">{{ $detail->os }}</td>
                                 <!-- <td class="py-2 px-4 border-b text-center">{{ $detail->status }}</td> -->
                                 <td class="py-2 px-4 border-b text-center">
-                                    <form action="{{ route('manage_order.update-status', $detail->id) }}" method="post">
+                                    <form action="{{ route('orders.update-status', $detail->id) }}" method="post">
                                         @csrf
                                         @method('put')
                                         <select name="status" onchange="this.form.submit()" class="rounded-lg w-32">

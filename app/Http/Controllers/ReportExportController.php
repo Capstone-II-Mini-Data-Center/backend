@@ -15,12 +15,12 @@ class ReportExportController extends Controller
         // Create a new CSV writer instance
         $csv = Writer::createFromString('');
 
-        // Set the CSV header based on the report type
+        // Set the CSV header based on the reports type
         if ($reportType === 'user_report') {
             $csv->insertOne(['User ID', 'User Name', 'Total Orders', 'Total Package']);
 
             $users = User::where('role', 'user')
-                ->has('orders.order_details') 
+                ->has('orders.order_details')
                 ->with([
                     'orders' => function ($query) {
                         $query->with([
@@ -41,10 +41,10 @@ class ReportExportController extends Controller
                     $user->orders->flatMap->order_details->sum('package_count'),
                 ]);
             }
-            
+
             $totalUsers = $users->count();
             $csv->insertOne(['Total Users', '', $totalUsers, '']);
-             
+
         } elseif ($reportType === 'package_report') {
             $csv->insertOne(['Package ID', 'Package Name', 'Total Sold', 'Unit Price', 'Total Price']);
 
@@ -69,14 +69,14 @@ class ReportExportController extends Controller
                 return $package->order_details_count * $package->price;
             }), 2)]);
         } else {
-            // Handle unsupported report type
-            return response()->json(['error' => 'Unsupported report type'], 400);
+            // Handle unsupported reports type
+            return response()->json(['error' => 'Unsupported reports type'], 400);
         }
 
         // Set the response headers
         $headers = [
             'Content-Type'        => 'text/csv',
-            'Content-Disposition' => 'attachment; filename="report.csv"',
+            'Content-Disposition' => 'attachment; filename="reports.csv"',
         ];
 
         // Return the CSV as a downloadable file

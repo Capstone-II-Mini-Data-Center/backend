@@ -17,7 +17,7 @@
                             <th class="w-2/7 py-2 px-4 border-b text-center">Status</th>
                             <th class="w-2/7 py-2 px-4 border-b text-center">Update Status</th>
                             <th class="w-1/7 py-2 px-4 border-b text-center">Action</th>
-                        </>
+                        </t>
                     </thead>
                     <tbody>
                         @foreach($orders as $order)
@@ -28,7 +28,7 @@
                                     <span id="status_{{ $order->id }}">{{ $order->status }}</span>
                                 </td>
                                 <td class="py-2 px-4 border-b text-center">
-                                    <form id="updateForm_{{ $order->id }}" action="{{ route('manage_order.update-status', $order->id) }}" method="post">
+                                    <form id="updateForm_{{ $order->id }}" action="{{ route('orders.update-status', $order->id) }}" method="post">
                                         @csrf
                                         @method('put')
                                         <select name="status" class="border rounded-md py-1 px-2 w-3/5" onchange="confirmUpdateStatus('{{ $order->id }}', this.value)">
@@ -36,23 +36,23 @@
                                             <option value="in progress" {{ $order->status === 'in progress' ? 'selected' : '' }}>In Progress</option>
                                             <option value="delivered" {{ $order->status === 'delivered' ? 'selected' : '' }}>Delivered</option>
                                             <option value="expired" {{ $order->status === 'expired' ? 'selected' : '' }}>Expired</option>
-                                        </select> 
+                                        </select>
                                     </form>
                                 </td>
                                 <td class="py-2 px-4 text-center flex justify-center items-center">
                                     <button class="flex items-center bg-blue-500 text-white rounded-lg py-2 hover:bg-blue-300">
-                                        <a href="{{ route('manage_order.show', $order->id) }}" class=" text-blue-501 mr-2">
+                                        <a href="{{ route('orders.show', $order->id) }}" class=" text-blue-501 mr-2">
                                             <div class="flex justify-between items-center ">
                                                 <div class="ml-4">
                                                     Detailed
                                                 </div>
                                                 <div class=" flex justify-center items-center ml-3">
-                                                    <i class="fas fa-edit" style="color: white;"></i> 
+                                                    <i class="fas fa-edit" style="color: white;"></i>
                                                 </div>
-                                            
+
                                             </div>
-                                        </a>  
-                                    </button> 
+                                        </a>
+                                    </button>
                                 </td>
                             </tr>
                         @endforeach

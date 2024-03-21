@@ -1,4 +1,4 @@
-<!-- resources/views/manage_banner/create.blade.php -->
+<!-- resources/views/banners/create.blade.php -->
 
 @extends('layouts.app')
 
@@ -9,7 +9,7 @@
     <div class="w-6/7 bg-white mr-10 ml-10 flex justify-center">
         <!-- <h1 class="text-2xl font-semibold mb-6">Create Banner</h1> -->
 
-        <form action="{{ route('manage_banner.store') }}" method="post" enctype="multipart/form-data" class="w-1/2 p-10 bg-gray-100 shadow-lg rounded-xl">
+        <form action="{{ route('banners.store') }}" method="post" enctype="multipart/form-data" class="w-1/2 p-10 bg-gray-100 shadow-lg rounded-xl">
             @csrf
             <div class="mb-4">
                 <label for="title" class="block text-sm font-medium text-gray-700">Title</label>
