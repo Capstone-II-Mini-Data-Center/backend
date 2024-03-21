@@ -8,74 +8,78 @@
         <div class="flex justify-between mb-4">
             <h1 class="text-2xl font-semibold" style="color: #3B82F6;" >Welcome,  {{ $admins->name }}</h1>
         </div>
-        <div class="flex flex-row justify-between text-bold text-white " >
-            <div class="py-3 m-3 w-1/4 flex" style="background-color: #3B82F6;" >
-                <div class="px-5">
+        <div class="flex flex-row justify-between text-bold" style="color: #3B82F6;" >
+            <div class="py-3 px-3 m-3 w-1/4 flex justify-between shadow-lg rounded-lg" style="background-color: #FFFFFF;" >
+                <div>
                     <div class="">
                         Total User
                     </div>
-                    <div class="text-3xl">
+                    <div class="text-4xl">
                         {{ $usersWithOrdersCount }}
                     </div>
                 </div>
-                <div class="flex items-center ml-10">
+                <div class="flex items-center">
                     <span class="material-symbols-outlined"  style="font-size: 50px;">
                         supervisor_account
                     </span>
                 </div>
             </div>
 
-            <div class="py-3 m-3 w-1/4 flex" style="background-color: #3B82F6;" >
-                <div class="px-5">
-                    <div class="">
+            <div class="py-3 px-3 m-3 w-1/4 flex justify-between shadow-lg rounded-lg"  style="background-color: #FFFFFF;" >
+                <div>
+                    <div>
                         Total Package
                     </div>
-                    <div class="text-3xl">
+                    <div class="text-4xl">
                         {{ $allPackagesCount }}
                     </div>
                 </div>
-                <div class="ml-5 flex items-center">
+                <div class="flex items-center">
                     <span class="material-symbols-outlined" style="font-size: 50px;">
                         box
                     </span>
                 </div>
             </div>
 
-            <div class="py-3 px-5 m-3 w-1/4 flex" style="background-color: #3B82F6;" >
-                <div class="">
-                    <div class="">
+            <div class="py-3 px-3 m-3 w-1/4 flex shadow-lg rounded-lg justify-between" style="background-color: #FFFFFF;" >
+                <div>
+                    <div>
                         Total Order
                     </div>
-                    <div class="text-3xl">
+                    <div class="text-4xl">
                         {{ $allOrdersCount }}
                     </div>
                 </div>
-                <div class="ml-10">
-                    icons
+                <div class="flex items-center" >
+                    <span class="material-symbols-outlined"  style="font-size: 50px; ">
+                        local_mall
+                    </span>
                 </div>
             </div>
 
-            <div class="py-3 px-5 m-3 w-1/4 flex" style="background-color: #3B82F6;" >
-                <div class="">
-                    <div class="">
+            <div class="py-3 px-3 m-3 w-1/4 flex justify-between shadow-lg rounded-lg" style="background-color: #FFFFFF;" >
+                <div>
+                    <div>
                         Total Revenue
                     </div>
-                    <div class="text-3xl">
+                    <div class="text-4xl">
                          ${{ $totalRevenue }}
                     </div>
                 </div>
-                <div class="ml-10">
-                    icons
+                <div class="ml-5 flex items-center">
+                    <span class="material-symbols-outlined"  style="font-size: 50px;">
+                        monetization_on
+                    </span>
                 </div>
             </div>
 
         </div>
 
-        <div class="flex">
-            <div class="m-3 w-3/5 ">
-                <div class="mt-3 mx-3">
-                    <label for="dateFilter">Select Date Range:</label>
-                    <select id="dateFilter">
+        <div class="">
+            <div class="p-10 shadow-xl">
+                <div>
+                    <label for="dateFilter">Select Date:</label>
+                    <select id="dateFilter" class="rounded-lg ml-3">
                         <option value="today" @if($selectedFilter == 'today') selected @endif>Today</option>
                         <option value="this_month" @if($selectedFilter == 'this_month') selected @endif>This Month</option>
                         <option value="last_month" @if($selectedFilter == 'last_month') selected @endif>Last Month</option>
@@ -87,7 +91,7 @@
                     <canvas id="revenueChart" width="400" height="200"></canvas>
                 </div>
             </div>
-            <div class=" w-2/5 m-3">
+            <div class=" w-3/6 mt-5 shadow-xl py-10">
                 <canvas id="topPackagesChart" width="350" height="340"></canvas></div>
             </div>
         </div>
@@ -150,6 +154,10 @@
                     title: {
                         display: true,
                         text: 'Top 5 Packages',
+                        fontColor: '#3B82F6',
+                        fontSize: 18,
+                        fontStyle: 'bold',
+                        lineHeight: 2,
                     },
                 },
             });

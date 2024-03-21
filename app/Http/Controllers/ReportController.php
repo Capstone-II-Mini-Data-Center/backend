@@ -15,21 +15,21 @@ class ReportController extends Controller
         $reportType = $request->input('reportType', 'user_report');
 
         if ($reportType === 'user_report') {
-            $users = User::where('role', 'user')
-                ->has('orders.order_details') // Ensure users have orders with order details
-                ->with([
-                    'orders' => function ($query) {
-                        $query->with([
-                            'order_details' => function ($query) {
-                                $query->select('order_id', DB::raw('count(*) as package_count'))
-                                    ->groupBy('order_id');
-                            }
-                        ]);
-                    }
-                ]);
+            $users = User::where('role', 'user');
+//                ->has('orders.order_details') // Ensure users have orders with order details
+//                ->with([
+//                    'orders' => function ($query) {
+//                        $query->with([
+//                            'order_details' => function ($query) {
+//                                $query->select('order_id', DB::raw('count(*) as package_count'))
+//                                    ->groupBy('order_id');
+//                            }
+//                        ]);
+//                    }
+//                ]);
 //                ->get();
 
-            $totalUsers = $users->count();
+            $totalUsers = empty($users->count()) ? 0 : $users->count();
 
             return view('reports.index', compact('users', 'totalUsers', 'reportType'));
         } elseif ($reportType === 'package_report') {

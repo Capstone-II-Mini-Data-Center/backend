@@ -49,6 +49,7 @@ Route::delete('/packages/{id}', [PackageController::class, 'destroy'])->name('pa
 Route::get('/packages/search', [PackageController::class, 'search'])->name('packages.search');
 Route::get('/packages/filterByRecommended', [PackageController::class, 'filterByRecommended'])->name('packages.filterByRecommended');
 Route::get('/packages/filterByPriceRange', [PackageController::class, 'filterByPriceRange'])->name('packages.filterByPriceRange');
+Route::get('/packages/{package}', [PackageController::class, 'show'])->name('packages.show');
 
 
 Route::get('/banners', [BannerController::class, 'index'])->name('banners.index');
@@ -57,6 +58,7 @@ Route::post('/banners', [BannerController::class, 'store'])->name('banners.store
 Route::get('/banners/{id}/edit', [BannerController::class, 'edit'])->name('banners.edit');
 Route::put('/banners/{id}', [BannerController::class, 'update'])->name('banners.update');
 Route::delete('/banners/{id}', [BannerController::class, 'destroy'])->name('banners.destroy');
+Route::get('/banners/{banner}', [BannerController::class, 'show'])->name('banners.show');
 
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');

@@ -4,8 +4,8 @@
        :class="isSidebarExpanded ? 'w-64' : 'w-20'">
     <a href="#"
        class="h-14 flex items-center px-4 bg-gray-800 border-b-2 border-dashed border-gray-600 overflow-hidden">
-        <img src="{{ asset('images/logo.png') }}" class="flex-shrink-0" alt="cloudbloc logo"
-             :class="isSidebarExpanded ? 'w-20 h-20' : 'w-14 h-14'">
+        <img src="{{ asset('images/logo.png') }}" class="flex-shrink-0 w-14 h-8" alt="cloudbloc logo"
+             >
         <span class="ml-2 text-xl font-medium duration-300 ease-in-out"
               :class="isSidebarExpanded ? 'opacity-100' : 'opacity-0'">CloudBloc</span>
     </a>
