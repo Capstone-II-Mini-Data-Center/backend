@@ -79,7 +79,7 @@
             </div>
 
             <div class="shadow-lg rounded-xl px-5 py-5 border">
-                <table class="min-w-full rounded-lg overflow-hidden">
+                <table class="min-w-full rounded-lg overflow-x-auto">
                     <thead class="text-blue-500">
                         <tr>
                             <th class="w-2/7 py-2 px-4 border-b text-center">No</th>
