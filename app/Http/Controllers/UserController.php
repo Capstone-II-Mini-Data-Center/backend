@@ -23,7 +23,8 @@ class UserController extends Controller
             $query->where('name', 'like', '%' . $searchTerm . '%');
         }
 
-        $users = $query->get();
+        // $users = $query->get();
+        $users = $query->paginate(10);
 
         if ($request->has('dashboard_view')) {
             return view('dashboard', compact('admins'));

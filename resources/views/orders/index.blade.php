@@ -77,11 +77,6 @@
                     </form>
                 </div>
             </div>
-            <!-- <div class="mr-auto">
-                <form method="get" action="{{ route('orders.reset-filters') }}">
-                    <button type="submit" class="bg-blue-400 hover:bg-green-300 p-2 rounded-md">Reset</button>
-                </form>
-             </div> -->
 
             <div class="shadow-lg rounded-xl px-5 py-5 border">
                 <table class="min-w-full rounded-lg overflow-hidden">
@@ -104,7 +99,7 @@
                         @foreach($orderDetails as $detail)
                             <tr class="">
                                 <td class="py-2 px-4 border-b text-center">{{ $loop->iteration }}</td>
-                                <td class="py-2 px-4 border-b text-center">{{ $detail->order->user->name }}</td>
+                                <td class="py-2 px-4 border-b text-center">{{ optional($detail->order->user)->name }}</td>
                                 <td class="py-2 px-4 border-b text-center">{{ $detail->package_name }}</td>
                                 <td class="py-2 px-4 border-b text-center">${{ number_format($detail->unit_price, 2) }}</td>
                                 <td class="py-2 px-4 border-b text-center">${{ number_format($detail->discount_amount, 2) }}</td>
@@ -141,6 +136,38 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="flex p-3 justify-between">
+                    <div></div>
+                    <div>
+                        @if ($orderDetails->hasPages())
+                        <ul class="pagination">
+                            @if ($orderDetails->onFirstPage())
+                                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link" href="{{ $orderDetails->previousPageUrl() }}">&laquo;</a></li>
+                            @endif
+
+                            @foreach ($orderDetails->getUrlRange(1, $orderDetails->lastPage()) as $page => $url)
+                                <li class="page-item {{ $page == $orderDetails->currentPage() ? 'active' : '' }}"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                            @endforeach
+
+                            @if ($orderDetails->hasMorePages())
+                                <li class="page-item"><a class="page-link" href="{{ $orderDetails->nextPageUrl() }}">&raquo;</a></li>
+                            @else
+                                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                            @endif
+                        </ul>
+                        @else
+                        <!-- If there's only one page of data, still display pagination links -->
+                        <ul class="pagination">
+                            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                            <li class="page-item active"><span class="page-link">1</span></li>
+                            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                        </ul>
+                        @endif
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

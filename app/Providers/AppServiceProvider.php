@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth; 
 
@@ -24,6 +25,8 @@ class AppServiceProvider extends ServiceProvider
         View::composer('*', function ($view) {
             $view->with('admins', Auth::user());
         });
+
+        Paginator::useBootstrap();
 
     }
 }

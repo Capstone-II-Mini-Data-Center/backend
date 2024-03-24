@@ -18,7 +18,8 @@ class BannerController extends Controller
             $query->where('published', $published);
         }
 
-        $banners = $query->get();
+        // $banners = $query->get();
+         $banners = $query->paginate(10);
         return view('banners.index', compact('banners'));
     }
 

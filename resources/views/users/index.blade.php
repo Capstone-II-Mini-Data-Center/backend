@@ -30,7 +30,7 @@
             </div>
 
             <div class="shadow-lg rounded-xl">
-            <table class="min-w-full border border-collapse  rounded-lg overflow-hidden">
+            <table class="min-w-full rounded-lg overflow-hidden">
                 <thead class="text-blue-500 border border-2">
                     <tr>
                         <th class="w-3/7 py-2 px-4 border-b text-center">No</th>
@@ -67,6 +67,39 @@
                     @endforeach
                 </tbody>
             </table>
+            <div class="p-3 flex justify-between">
+                <div></div>
+                <!-- <div>
+                    {{ $users->links() }}
+                </div> -->
+                <div>
+                    @if ($users->hasPages())
+                        <ul class="pagination">
+                            @if ($users->onFirstPage())
+                                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link" href="{{ $users->previousPageUrl() }}">&laquo;</a></li>
+                            @endif
+
+                            @foreach ($users->getUrlRange(1, $users->lastPage()) as $page => $url)
+                                <li class="page-item {{ $page == $users->currentPage() ? 'active' : '' }}"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                            @endforeach
+
+                            @if ($users->hasMorePages())
+                                <li class="page-item"><a class="page-link" href="{{ $users->nextPageUrl() }}">&raquo;</a></li>
+                            @else
+                                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                            @endif
+                        </ul>
+                    @else
+                        <!-- If there's only one page of data, still display pagination links -->
+                        <ul class="pagination">
+                            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                            <li class="page-item active"><span class="page-link">1</span></li>
+                            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                        </ul>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

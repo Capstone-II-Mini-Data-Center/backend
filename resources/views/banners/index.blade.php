@@ -66,7 +66,7 @@
                                 </td>
                                 <td class="py-2 px-4 border-b text-center ">
                                     <div class="flex flex-row justify-center items-center">
-                                        <a href="{{ route('manage_banner.edit', $banner->id) }}" class="mr-3" title="Edit">
+                                        <a href="{{ route('banners.edit', $banner->id) }}" class="mr-3" title="Edit">
                                             <i class="fas fa-edit" style="color: blue;"></i>
                                         </a>
                                         <form id="deleteForm" action="{{ route('banners.destroy', $banner->id) }}" method="post">
@@ -76,7 +76,7 @@
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
-                                        <a href="{{ route('manage_banner.show', $banner->id) }}" class=" text-blue-501 mr-2">
+                                        <a href="{{ route('banners.show', $banner->id) }}" class=" text-blue-501 mr-2">
                                             <div class=" flex justify-center items-center ml-3 " title="View Detail">
                                                 <i class="fa-regular fa-file-lines" style="color: blue;"></i>
                                             </div>
@@ -87,6 +87,37 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
+             <div class="p-3 flex justify-between">
+                <div></div>
+                <div>
+                    @if ($banners->hasPages())
+                        <ul class="pagination">
+                            @if ($banners->onFirstPage())
+                                <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                            @else
+                                <li class="page-item"><a class="page-link" href="{{ $banners->previousPageUrl() }}">&laquo;</a></li>
+                            @endif
+
+                            @foreach ($banners->getUrlRange(1, $banners->lastPage()) as $page => $url)
+                                <li class="page-item {{ $page == $banners->currentPage() ? 'active' : '' }}"><a class="page-link" href="{{ $url }}">{{ $page }}</a></li>
+                            @endforeach
+
+                            @if ($banners->hasMorePages())
+                                <li class="page-item"><a class="page-link" href="{{ $banners->nextPageUrl() }}">&raquo;</a></li>
+                            @else
+                                <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                            @endif
+                        </ul>
+                    @else
+                        <!-- If there's only one page of data, still display pagination links -->
+                        <ul class="pagination">
+                            <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+                            <li class="page-item active"><span class="page-link">1</span></li>
+                            <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+                        </ul>
+                    @endif
+                </div>
             </div>
         </div>
     </div>
