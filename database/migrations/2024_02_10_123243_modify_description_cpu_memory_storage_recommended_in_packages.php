@@ -26,7 +26,11 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('packages', function (Blueprint $table) {
-            //
+            $table->text("description")->change();
+            $table->string("cpu")->change();
+            $table->string("memory")->change();
+            $table->string("storage")->change();
+            $table->boolean('recommended')->default(false)->change();
         });
     }
 };

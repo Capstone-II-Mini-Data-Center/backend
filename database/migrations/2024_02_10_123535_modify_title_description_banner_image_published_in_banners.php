@@ -25,7 +25,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('banners', function (Blueprint $table) {
-            //
+            $table->string("title")->change();
+            $table->text("description")->change();
+            $table->string("banner_image")->change();
+            $table->boolean("published")->default(0)->change();
         });
     }
 };
