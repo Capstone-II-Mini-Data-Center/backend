@@ -29,7 +29,7 @@ class CheckoutOrderController extends Controller
                     "os" => $orderDetail["os"],
                     "plan" => $orderDetail["plan"],
                     "package_id" => $orderDetail["package_id"],
-                    "orders_id" => $order->id,
+                    "order_id" => $order->id,
                     "package_name" => $orderDetail["package_name"],
                     "unit_price" => $orderDetail["unit_price"],
                     "discount_amount" => 0,
