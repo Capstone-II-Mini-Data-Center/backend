@@ -78,7 +78,7 @@
         <div class="">
             <div class="p-10 shadow-xl">
                 <div>
-                    <label for="dateFilter">Select Date:</label>
+                    <label for="dateFilter"">Select Date:</label>
                     <select id="dateFilter" class="rounded-lg ml-3">
                         <option value="today" @if($selectedFilter == 'today') selected @endif>Today</option>
                         <option value="this_month" @if($selectedFilter == 'this_month') selected @endif>This Month</option>

@@ -53,7 +53,7 @@
                     Description
                 </div>
                 <div class="text-blue-400">
-                    {{ $banner->description }}
+                    {{ $banner->description }}</>
                 </div>
             </div>
         </div>

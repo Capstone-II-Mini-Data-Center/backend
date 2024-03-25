@@ -62,7 +62,7 @@
                     </table>
                 </div>
             @elseif ($reportType === 'package_report')
-                <!-- Package reports -->
+                <!-- Package Report -->
                 <div class="shadow-lg rounded-xl px-5 py-5 border">
                     <table class="min-w-full rounded-lg overflow-hidden">
                         <thead class="text-blue-500 ">

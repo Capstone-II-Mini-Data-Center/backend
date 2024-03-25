@@ -25,9 +25,9 @@
                     <div class="profile" id="profileDropdown" onclick="toggleDropdown()">
                         <img src="{{ asset('images/user.png') }}" alt="User" class="w-10">
                     </div>
-                    <div class="admin_name text-lg" style="color: #3B82F6;">
-                        {{$admins->name}}
-                    </div>
+                        <div class="admin_name text-lg" style="color: #3B82F6;">
+                            {{$admins->name}}
+                        </div>
                 </div>
 
             </div>
@@ -86,7 +86,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                                           onclick="event.preventDefault();
+                            onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

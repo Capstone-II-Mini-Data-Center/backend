@@ -81,7 +81,7 @@
                     Description
                 </div>
                 <div class="text-blue-400">
-                    {{ $package->description }}
+                    {{ $package->description }}</>
                 </div>
             </div>
         </div>

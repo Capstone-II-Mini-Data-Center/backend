@@ -43,7 +43,7 @@
                     </div>
                     <div class=" w-96 ml-2 mr-4">
                         <div>
-                        <img src="{{ asset('images/logo-rec.png') }}" alt="Logo" class="w-80 ml-8"> 
+                        <img src="{{ asset('images/logo.png') }}" alt="Logo" class="w-80 ml-8"> 
                         </div>
                         <div class="text-5xl font-bold ml-20 mt-6" style="color:#3B82F6;">
                             CloudBloc

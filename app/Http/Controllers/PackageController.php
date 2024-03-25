@@ -20,6 +20,12 @@ class PackageController extends Controller
         return view('packages.show', compact('package'));
     }
 
+     public function show($id)
+    {
+        $package = Package::findOrFail($id);
+        return view('manage_package.show', compact('package'));
+    }
+
     public function create()
     {
         return view('packages.create');
