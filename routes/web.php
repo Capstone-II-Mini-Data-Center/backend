@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PackageController;
 use App\Http\Controllers\BannerController;
+use App\Http\Controllers\ProxmoxController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ManageOrderController;
 use App\Http\Controllers\DashboardController;
@@ -91,6 +92,11 @@ Route::get('/test', function (){
     return view('welcome');
 });
 
+Route::get('/container/create', [ProxmoxController::class, 'createContainer'])->name('vm');
+
+Route::post('/container/start/{vmid}', [ProxmoxController::class, 'startContainer']);
+
+Route::post('/container/stop/{vmid}', [ProxmoxController::class, 'stopContainer']);
 
 
 

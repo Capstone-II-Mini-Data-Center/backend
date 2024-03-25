@@ -8,8 +8,11 @@ use App\Models\OrderDetails;
 use App\Models\User;
 use Carbon\Carbon;
 use App\Mail\SendMail;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
 
 
 class ManageOrderController extends Controller
@@ -73,15 +76,52 @@ class ManageOrderController extends Controller
         $request->validate([
             'status' => 'required|in:pending,in progress,delivered,expired',
         ]);
-        $previousStatus = $orderDetail->status;
-        $orderDetail->status = $request->input('status');
-        $orderDetail->save();
-
-        if ($orderDetail->status === 'delivered' && $previousStatus !== 'delivered') {
-        $userEmail = $orderDetail->order->user->email;
-        Mail::to($userEmail)->send(new SendMail($orderDetail->package_name));
-        }
+        $order = OrderDetails::with('package')->find($orderDetail->id);
+//        $previousStatus = $orderDetail->status;
+//        $orderDetail->status = $request->input('status');
+//        $orderDetail->save();
+        $this->__createContainer($order);
+//            dd($this->__createContainer($order));
+//        if ($orderDetail->status === 'delivered' && $previousStatus !== 'delivered') {
+//        $userEmail = $orderDetail->order->user->email;
+//        Mail::to($userEmail)->send(new SendMail($orderDetail->package_name));
+//        }
 
         return redirect()->route('orders.index')->with('success', 'Order status updated successfully.');
+    }
+
+    public function __createContainer($order)
+    {
+        $request = Request::create('/api/container/create', 'POST',[
+            'vmid' => 203,
+            'memory' => 1,
+            'cores' => 2,
+            'disk_storage' => 20
+        ]);
+
+        $response = Route::dispatch($request);
+        $vmid = $this->generateVmid();
+//        $response = Http::post($endpoint, [
+//            'vmid' => $vmid,
+//            'memory' => $order->package->memory,
+//            'cores' => $order->package->cpu,
+//            'disk_storage' => $order->package->storage
+//        ]);
+//        $response = Http::post($endpoint, [
+//            // Pass any necessary request data here
+//            'vmid' => 203,
+//            'memory' => 1,
+//            'cores' => 2,
+//            'disk_storage' => 20
+//        ]);
+//
+//        $responseData = $response->json();
+//        dd($responseData);
+        return $response;
+    }
+
+    private function generateVmid() {
+       return rand(110,300);
+
     }
 }

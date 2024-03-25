@@ -29,36 +29,35 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="font-sans antialiased">
-{{--    <div class="min-h-screen bg-gray-101 dark:bg-gray-900">--}}
-{{--        @include('confirmation-modal')--}}
-{{--        @include('layouts.navigation')--}}
+    <div class="min-h-screen bg-gray-101 dark:bg-gray-900">
+        @include('confirmation-modal')
+        @include('layouts.navigation')
 
-{{--        <!-- Page Content -->--}}
-{{--        <main class="flex">--}}
-{{--            <div class="w-1/6">--}}
-{{--                @include('layouts.side-bar')--}}
-{{--            </div>--}}
-{{--            <div class="w-5/6 bg-white p-6 ">--}}
-{{--                @yield('content')--}}
-{{--            </div>--}}
-{{--        </main>--}}
-{{--    </div>--}}
-<div class="flex bg-gray-100 w-full overflow-x-hidden" x-data="{ isSidebarExpanded: true }">
-    <!-- sidebar -->
-    @include('layouts.side-bar')
-    <div class="flex flex-col flex-grow overflow-hidden">
-        <div class="">
-            @include('layouts.navigation')
-
-            <div class="m-5 flex flex-col flex-grow ">
+        <!-- Page Content -->
+        <main class="flex">
+            <div class="w-1/6">
+                @include('layouts.side-bar')
+            </div>
+            <div class="w-5/6 bg-white p-6 ">
                 @yield('content')
             </div>
-
-        </div>
+        </main>
     </div>
+{{--<div class="flex bg-gray-100 w-full overflow-x-hidden" x-data="{ isSidebarExpanded: true }">--}}
+{{--    <!-- sidebar -->--}}
+{{--    @include('layouts.side-bar')--}}
+{{--    <div class="flex flex-col flex-grow overflow-auto">--}}
+{{--        <div class="">--}}
+{{--            @include('layouts.navigation')--}}
 
-</div>
-</div>
+{{--            <div class="m-5 flex flex-col flex-grow ">--}}
+{{--                @yield('content')--}}
+{{--            </div>--}}
+
+{{--        </div>--}}
+{{--    </div>--}}
+
+{{--</div>--}}
 </body>
 
 </html>

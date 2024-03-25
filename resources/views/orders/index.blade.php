@@ -79,7 +79,7 @@
             </div>
 
             <div class="shadow-lg rounded-xl px-5 py-5 border">
-                <table class="min-w-full rounded-lg overflow-x-auto">
+                <table class="min-w-full rounded-lg overflow-hidden">
                     <thead class="text-blue-500">
                         <tr>
                             <th class="w-2/7 py-2 px-4 border-b text-center">No</th>
@@ -99,7 +99,7 @@
                         @foreach($orderDetails as $detail)
                             <tr class="">
                                 <td class="py-2 px-4 border-b text-center">{{ $loop->iteration }}</td>
-                                <td class="py-2 px-4 border-b text-center">{{ optional($detail->order->user)->name }}</td>
+                                <td class="py-2 px-4 border-b text-center">{{ empty($detail->order->user->name) ? 'N/A' : $detail->order->user->name }}</td>
                                 <td class="py-2 px-4 border-b text-center">{{ $detail->package_name }}</td>
                                 <td class="py-2 px-4 border-b text-center">${{ number_format($detail->unit_price, 2) }}</td>
                                 <td class="py-2 px-4 border-b text-center">${{ number_format($detail->discount_amount, 2) }}</td>
@@ -107,7 +107,11 @@
                                 <td class="py-2 px-4 border-b text-center">{{ $detail->plan }}</td>
                                 <td class="py-2 px-4 border-b text-center">{{ $detail->expired_date }}</td>
                                 <td class="py-2 px-4 border-b text-center">{{ $detail->os }}</td>
-                                <!-- <td class="py-2 px-4 border-b text-center">{{ $detail->status }}</td> -->
+                                <td>
+                                    <a href="{{ route('vm') }}">
+                                        vm
+                                    </a>
+                                </td>
                                 <td class="py-2 px-4 border-b text-center">
                                     <form action="{{ route('orders.update-status', $detail->id) }}" method="post">
                                         @csrf
