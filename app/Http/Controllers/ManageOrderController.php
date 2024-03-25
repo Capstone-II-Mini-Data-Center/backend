@@ -53,7 +53,7 @@ class ManageOrderController extends Controller
             $query->whereBetween('expired_date', [$start_date, $end_date]);
         }
 
-            $orderDetails = $query->paginate(10);
+            $orderDetails = $query->orderByDesc('id')->paginate(10);
 
             return view('orders.index', compact('orderDetails', 'status','username','plan','start_date','end_date'));
         }
