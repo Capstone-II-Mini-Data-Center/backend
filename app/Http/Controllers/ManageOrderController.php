@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ServerCred;
 use Illuminate\Http\Request;
 use App\Models\Orders;
 use App\Models\OrderDetails;
@@ -77,48 +78,53 @@ class ManageOrderController extends Controller
             'status' => 'required|in:pending,in progress,delivered,expired',
         ]);
         $order = OrderDetails::with('package')->find($orderDetail->id);
-//        $previousStatus = $orderDetail->status;
-//        $orderDetail->status = $request->input('status');
-//        $orderDetail->save();
-        $this->__createContainer($order);
-//            dd($this->__createContainer($order));
-//        if ($orderDetail->status === 'delivered' && $previousStatus !== 'delivered') {
-//        $userEmail = $orderDetail->order->user->email;
-//        Mail::to($userEmail)->send(new SendMail($orderDetail->package_name));
-//        }
+        $previousStatus = $orderDetail->status;
+        $orderDetail->status = $request->input('status');
+        $orderDetail->save();
+//        dd($this->__createContainer($order));
+        $credentials = [];
+        if ($orderDetail->status === 'in progress'){
+            $credentials =  $this->__createContainer($order);
+            if (!empty($credentials)){
+                $server = new ServerCred();
+                $server->order_detail_id = $orderDetail->id;
+                $server->username = $credentials['username'];
+                $server->password = $credentials['password'];
+                $server->save();
+                if ($server->save()){
+                    (new SendNotificationController)->sendNotification($orderDetail->id);
+                }
+            }
+        }
+//        dd($credentials);
+        if ($orderDetail->status === 'delivered' && $previousStatus !== 'delivered') {
+            $server = ServerCred::where('order_detail_id', '=', $orderDetail->id)->first();
+//            $userEmail = 'pi.sreyneath@gmail.com';
+            $userEmail = $orderDetail->order->user->email;
+            Mail::to($userEmail)->send(new SendMail($orderDetail->package_name,$server->username, $server->password));
+        }
 
         return redirect()->route('orders.index')->with('success', 'Order status updated successfully.');
     }
 
     public function __createContainer($order)
     {
-        $request = Request::create('/api/container/create', 'POST',[
-            'vmid' => 203,
-            'memory' => 1,
-            'cores' => 2,
-            'disk_storage' => 20
-        ]);
-
-        $response = Route::dispatch($request);
+        $data = [];
         $vmid = $this->generateVmid();
-//        $response = Http::post($endpoint, [
-//            'vmid' => $vmid,
-//            'memory' => $order->package->memory,
-//            'cores' => $order->package->cpu,
-//            'disk_storage' => $order->package->storage
-//        ]);
-//        $response = Http::post($endpoint, [
-//            // Pass any necessary request data here
-//            'vmid' => 203,
-//            'memory' => 1,
-//            'cores' => 2,
-//            'disk_storage' => 20
-//        ]);
-//
-//        $responseData = $response->json();
-//        dd($responseData);
-        return $response;
+        $memory = $order->package->memory * 1024;
+        $cores =  $order->package->cpu;
+        $diskStorage = $order->package->storage;
+        $response = (new ProxmoxController)->createContainer($vmid, $memory, $cores, $diskStorage);
+        if ($response->getStatusCode() === 200){
+            $responseData = $response->getData(true);
+            $data = [
+                'username' => $responseData['result']['hostname'],
+                'password' => $responseData['result']['password']
+            ];
+        }
+        return $data;
     }
+
 
     private function generateVmid() {
        return rand(110,300);

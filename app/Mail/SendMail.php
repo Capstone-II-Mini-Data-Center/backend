@@ -13,16 +13,16 @@ class SendMail extends Mailable
 {
     use Queueable, SerializesModels;
     public $packageName;
-    // public $username;
-    // public $password;
+     public $username;
+     public $password;
     /**
      * Create a new message instance.
      */
-    public function __construct($packageName)
+    public function __construct($packageName, $username, $password)
     {
         $this->packageName = $packageName;
-        // $this->username = $username;
-        // $this->password = $password;
+         $this->username = $username;
+         $this->password = $password;
     }
 
     /**

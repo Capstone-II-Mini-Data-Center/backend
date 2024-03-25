@@ -9,9 +9,9 @@ use App\Http\Controllers\Controller;
 
 class ProxmoxController extends Controller
 {
-    public function createContainer(Request $request)
+    public function createContainer($vmid, $memory, $cores, $diskStorage)
     {
-//        try {
+        try {
 
             // Extract inputs from the request
 //            $vmid = $request->input('vmid');
@@ -19,10 +19,10 @@ class ProxmoxController extends Controller
 //            $cores = $request->input('cores');
 //            $diskStorage = $request->input('disk_storage');
 
-            $vmid = 109;
-            $memory = 16;
-            $cores = 2;
-            $diskStorage = 20;
+//            $vmid = 109;
+//            $memory = 16;
+//            $cores = 2;
+//            $diskStorage = 20;
 
             // Generate a random password
             $password = 'password123';
@@ -74,26 +74,26 @@ class ProxmoxController extends Controller
             // Close the SSH connection
             $ssh->disconnect();
 
-//            return response()->json([
-//                'code' => 200,
-//                'message' => 'Container created successfully',
-//                'result' => [
-//                    'vmid' => $vmid,
-//                    'hostname' => $hostname,
-//                    'memory' => $memory,
-//                    'cores' => $cores,
-//                    'disk_storage' => $diskStorage,
-//                    'password' => $password
-//                ]
-//            ]);
-//        } catch (Exception $e) {
-//            return response()->json([
-//                "code" => 400,
-//                "message" => "Failed to create container",
-//                'result' => null,
-//                'error' => $e->getMessage(),
-//            ], 500);
-//        }
+            return response()->json([
+                'code' => 200,
+                'message' => 'Container created successfully',
+                'result' => [
+                    'vmid' => $vmid,
+                    'hostname' => $hostname,
+                    'memory' => $memory,
+                    'cores' => $cores,
+                    'disk_storage' => $diskStorage,
+                    'password' => $password
+                ]
+            ]);
+        } catch (Exception $e) {
+            return response()->json([
+                "code" => 400,
+                "message" => "Failed to create container",
+                'result' => null,
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
 
     public function startContainer($vmid)

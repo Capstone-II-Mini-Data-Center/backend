@@ -12,8 +12,8 @@
 
     <ul>
         <li><strong>Package Name:</strong> {{ $packageName }}</li>
-        <li><strong>Username:</strong> triseny</li>
-        <li><strong>Password:</strong> 12345</li>
+        <li><strong>Username:</strong> {{ $username }}</li>
+        <li><strong>Password:</strong> {{ $password }}</li>
     </ul>
 
     <p>Please keep your credentials secure and do not share them with anyone. You can now log in to your account and start managing your website and services.</p>
