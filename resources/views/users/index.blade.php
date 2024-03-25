@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="flex justify-center"> <!-- Center the content -->
-        <div class="w-full bg-white mt-10 mb-10 ml-12 rounded-lg">
+        <div class="w-full bg-white mb-10 ml-12 rounded-lg">
             <div class="py-3 px-6 border-b-2">
                 <h1 class="text-2xl font-semibold" style="color: #3B82F6;" >User Page</h1>
             </div>

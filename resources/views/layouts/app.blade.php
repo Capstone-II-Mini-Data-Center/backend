@@ -34,11 +34,11 @@
         @include('layouts.navigation')
 
         <!-- Page Content -->
-        <main class="flex" >
-            <div class="w-1/6">
+        <main class="flex flex-row" >
+            <div class="w-1/5">
                 @include('layouts.side-bar')
             </div>
-            <div class="w-full p-12 ml-12" style="background-color: #FAFAFA;">
+            <div class="w-4/5 px-12 py-5" style="background-color: #FAFAFA;">
                 @yield('content')
             </div>
         </main>

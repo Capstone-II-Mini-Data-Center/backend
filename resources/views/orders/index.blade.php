@@ -1,10 +1,10 @@
-<!-- resources/views/orders/show.blade.php -->
+<!-- resources/views/manage_order/show.blade.php -->
 
 @extends('layouts.app')
 
 @section('content')
     <div class="flex justify-center">
-        <div class="w-full max-w-6xl bg-white mt-10 mb-10 ml-12">
+        <div class="w-full bg-white  mb-10 ml-12">
             <div  class="py-3 px-6 border-b-2">
                 <div>
                     <h1 class="text-2xl font-semibold" style="color: #3B82F6;">List Order</h1>
@@ -73,26 +73,31 @@
                 </div>
                 <div class="flex items-center">
                     <form method="get" action="{{ route('orders.reset-filters') }}">
-                        <button type="submit" class="bg-blue-400 hover:bg-green-300 p-2 rounded-md">Reset</button>
-                    </form>
+                    <button type="submit" class="bg-blue-400 hover:bg-green-300 p-2 rounded-md">Reset</button>
+                </form>
                 </div>
             </div>
+            <!-- <div class="mr-auto">
+                <form method="get" action="{{ route('orders.reset-filters') }}">
+                    <button type="submit" class="bg-blue-400 hover:bg-green-300 p-2 rounded-md">Reset</button>
+                </form>
+            </div> -->
 
-            <div class="shadow-lg rounded-xl px-5 py-5 border">
-                <table class="min-w-full rounded-lg overflow-hidden">
+            <div class="shadow-lg rounded-xl px-5 py-5 border overflow-x-auto">
+                <table class="w-full rounded-lg table-auto">
                     <thead class="text-blue-500">
                         <tr>
-                            <th class="w-2/7 py-2 px-4 border-b text-center">No</th>
-                            <th class="w-2/7 py-2 px-4 border-b text-center">User</th>
-                            <th class="w-2/7 py-2 px-4 border-b text-center">Package Name</th>
-                            <th class="w-1/7 py-2 px-4 border-b text-center">Unit Price</th>
-                            <th class="w-1/7 py-2 px-4 border-b text-center">Discount Amount</th>
-                            <th class="w-1/7 py-2 px-4 border-b text-center">Total Amount</th>
-                            <th class="w-1/7 py-2 px-4 border-b text-center">Plan</th>
-                            <th class="w-1/7 py-2 px-4 border-b text-center">Expired Date</th>
-                            <th class="w-1/7 py-2 px-4 border-b text-center">OS</th>
+                            <th class="py-2 px-4 border-b text-center">No</th>
+                            <th class="py-2 px-4 border-b text-center">User</th>
+                            <th class="py-2 px-4 border-b text-center">Package Name</th>
+                            <th class="py-2 px-4 border-b text-center">Unit Price</th>
+                            <th class="py-2 px-4 border-b text-center">Discount Amount</th>
+                            <th class="py-2 px-4 border-b text-center">Total Amount</th>
+                            <th class="py-2 px-4 border-b text-center">Plan</th>
+                            <th class="py-2 px-4 border-b text-center">Expired Date</th>
+                            <th class="py-2 px-4 border-b text-center">OS</th>
                             <!-- <th class="w-1/7 py-2 px-4 border-b text-center">Status</th> -->
-                            <th class="w-1/7 py-2 px-4 border-b text-center">Status</th>
+                            <th class="py-2 px-4 border-b text-center">Status</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -107,11 +112,7 @@
                                 <td class="py-2 px-4 border-b text-center">{{ $detail->plan }}</td>
                                 <td class="py-2 px-4 border-b text-center">{{ $detail->expired_date }}</td>
                                 <td class="py-2 px-4 border-b text-center">{{ $detail->os }}</td>
-                                <td>
-                                    <a href="{{ route('vm') }}">
-                                        vm
-                                    </a>
-                                </td>
+                                <!-- <td class="py-2 px-4 border-b text-center">{{ $detail->status }}</td> -->
                                 <td class="py-2 px-4 border-b text-center">
                                     <form action="{{ route('orders.update-status', $detail->id) }}" method="post">
                                         @csrf
@@ -140,10 +141,14 @@
                         @endforeach
                     </tbody>
                 </table>
-                <div class="flex p-3 justify-between">
-                    <div></div>
-                    <div>
-                        @if ($orderDetails->hasPages())
+            </div>
+            <div class="p-3 flex justify-between">
+                <div></div>
+                <!-- <div>
+                    {{ $orderDetails->links() }}
+                </div> -->
+                <div>
+                    @if ($orderDetails->hasPages())
                         <ul class="pagination">
                             @if ($orderDetails->onFirstPage())
                                 <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
@@ -161,17 +166,15 @@
                                 <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
                             @endif
                         </ul>
-                        @else
+                    @else
                         <!-- If there's only one page of data, still display pagination links -->
                         <ul class="pagination">
                             <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
                             <li class="page-item active"><span class="page-link">1</span></li>
                             <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
                         </ul>
-                        @endif
-                    </div>
+                    @endif
                 </div>
-
             </div>
         </div>
     </div>

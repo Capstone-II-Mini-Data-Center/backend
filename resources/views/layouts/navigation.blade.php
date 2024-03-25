@@ -7,10 +7,10 @@
             <div class="flex justify-between">
                 <!-- Logo -->
                 <div class="">
-                    <div class="flex justify-between gap-3">
-                        <div class="w-24 mt-1">
+                    <div class="flex justify-between items-center gap-3">
+                        <div class="">
                             <a href="{{ route('dashboard') }}">
-                                <img src="{{ asset('images/logo.png') }}" alt="Logo" width="">
+                                <img src="{{ asset('images/logo.png') }}" alt="Logo" width="96px">
                             </a>
                         </div>
                         <!-- <a href="{{ route('dashboard') }}">
