@@ -21,7 +21,9 @@ class CheckoutOrderController extends Controller
                 "payment_image" => null,
                 "user_id" => $userLogin->user_id
             ]);
+//            dd($order);
             $orderDetails = $request->all();
+//            dd($orderDetails);
             $total_price = 0;
             foreach ($orderDetails as $orderDetail) {
                 OrderDetails::create([
@@ -38,6 +40,7 @@ class CheckoutOrderController extends Controller
                 ]);
                 $total_price += ($orderDetail   ["unit_price"] * intval($orderDetail["plan"]));
             }
+
             $order->update([
                 "total_amount" => $total_price
             ]);

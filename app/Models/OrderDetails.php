@@ -19,7 +19,7 @@ class OrderDetails extends Model
         'total_amount',
         'plan',
         'expired_date',
-        "orders_id",
+        "order_id",
         "package_id",
         "os",
         "status"
