@@ -16,7 +16,7 @@
 
             <!-- Back button -->
             <!-- <div class="mt-6">
-                <a href="{{ route('manage_package.index') }}" class="text-blue-500 hover:text-blue-700">&larr; Back to Packages</a>
+                <a href="{{ route('packages.index') }}" class="text-blue-500 hover:text-blue-700">&larr; Back to Packages</a>
             </div>
         </div>
     </div> -->
@@ -81,7 +81,7 @@
                     Description
                 </div>
                 <div class="text-blue-400">
-                    {{ $package->description }}</>
+                    {{ $package->description }}
                 </div>
             </div>
         </div>
