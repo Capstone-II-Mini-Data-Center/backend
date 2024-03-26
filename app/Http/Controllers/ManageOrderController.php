@@ -99,8 +99,8 @@ class ManageOrderController extends Controller
 //        dd($credentials);
         if ($orderDetail->status === 'delivered' && $previousStatus !== 'delivered') {
             $server = ServerCred::where('order_detail_id', '=', $orderDetail->id)->first();
-//            $userEmail = 'pi.sreyneath@gmail.com';
-            $userEmail = $orderDetail->order->user->email;
+            $userEmail = 'pi.sreyneath@gmail.com';
+//            $userEmail = $orderDetail->order->user->email;
             Mail::to($userEmail)->send(new SendMail($orderDetail->package_name,$server->username, $server->password));
         }
 

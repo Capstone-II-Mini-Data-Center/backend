@@ -36,10 +36,10 @@
                 <div class="flex flex-row items-center">
                     <div class="w-full pr-5">
                         <select name="cpu" id="cpu" class="pr-10 py-2 border rounded-md w-full" value="{{ old('cpu', $package->cpu) }}" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
                             <option value="4">4</option>
-                            <option value="8">8</option>
-                            <option value="16">16</option>
-                            <option value="32">32</option>
                         </select>
                     </div>
                     <div class="text-black-500 border rounded-md py-2 px-2 ">
@@ -53,10 +53,10 @@
                 <div class="flex flex-row items-center">
                     <div class="w-full pr-6">
                         <select name="memory" id="memory" class="pr-11 py-2 border rounded-md w-full" value="{{ old('memory', $package->memory) }}" required>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
                             <option value="4">4</option>
-                            <option value="8">8</option>
-                            <option value="16">16</option>
-                            <option value="32">32</option>
                         </select>
                     </div>
                     <div class="text-black-501 border rounded-md py-2 px-2 ">
@@ -70,11 +70,11 @@
                 <div class="flex flex-row items-center">
                     <div class="w-full pr-6">
                         <select name="storage" id="storage" class="pr-11 py-2 border rounded-md w-full" value="{{ old('storage', $package->storage) }}"  required>
-                            <option value="4">4</option>
-                            <option value="8">8</option>
-                            <option value="16">16</option>
-                            <option value="32">32</option>
-                            <option value="64">64</option>
+                            <option value="10">10</option>
+                            <option value="20">20</option>
+                            <option value="40">40</option>
+                            <option value="50">50</option>
+                            <option value="100">100</option>
                         </select>
                     </div>
                     <div class="text-black-501 border rounded-md py-2 px-2 ">
